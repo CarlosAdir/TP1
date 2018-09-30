@@ -1,16 +1,16 @@
-all: programa clean executar
+all: programa clean clear executar
 
-programa: main.o dominios.o entidades.o testes.o
-	g++ main.o dominios.o testes.o -o executavel
+programa: executa_testes.o dominios.o entidades.o testes.o
+	g++ executa_testes.o dominios.o entidades.o testes.o -o executavel
 
-main.o: dominios.o entidades.o testes.o
-	g++ -c -Wall -ansi main.cpp
+executa_testes.o: dominios.o entidades.o testes.o
+	g++ -c -Wall -ansi executa_testes.cpp
 
 dominios.o:
 	g++ -c -Wall -ansi dominios.cpp
 
 entidades.o: dominios.o
-	g++ -c -Wall -ansi testes.cpp
+	g++ -c -Wall -ansi entidades.cpp
 
 testes.o: dominios.o entidades.o
 	g++ -c -Wall -ansi testes.cpp
