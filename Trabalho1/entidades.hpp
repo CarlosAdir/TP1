@@ -14,9 +14,6 @@ public:
 	~Usuario();
 };
 
-
-
-
 	
 class Acomodacao
 {
@@ -35,8 +32,6 @@ public:
 };
 
 
-
-
 class CartaoCredito
 {
 private:
@@ -48,9 +43,6 @@ public:
 };
 
 
-
-
-
 class ContaCorrente
 {
 private:
@@ -60,8 +52,6 @@ private:
 public:
 	ContaCorrente();
 	~ContaCorrente();
-	
 };
-
 
 #endif

@@ -1,13 +1,28 @@
 #include <iostream>
 #include "testes.hpp"
-#define VERBOSE true
+
+
+/*! \mainpage Trabalho 1 - Técnicas de Programação 1 - Trabalho 1 
+ *
+ * \section intro_sec Introduction
+ *
+ * This is the introduction.
+ *
+ * \section install_sec Installation
+ *
+ * \subsection step1 Step 1: Opening the box
+ *
+ * etc...
+ */
+
+bool TU::VERBOSE = false;
 
 int main()
 {
 	const int TESTES_DOMINIO = 13;
 	const int TESTES_ENTIDADE = 4;
+	bool result = TU::SUCESSO;
 	int i;
-	bool result = true;
 
 	// TESTES DOMINIO
 	TUAgencia tuagencia = TUAgencia();
@@ -23,7 +38,7 @@ int main()
 	TUNumeroContaCorrente tunumerocontacorrente = TUNumeroContaCorrente();
 	TUSenha tusenha = TUSenha();
 	TUTipoAcomodacao tutipoacomodacao = TUTipoAcomodacao();
-	
+
 	// TESTES ENTIDADE
 	TUUsuario tuusuario = TUUsuario();
 	TUAcomodacao tuacomodacao = TUAcomodacao();
@@ -31,11 +46,11 @@ int main()
 	TUContaCorrente tucontacorrente = TUContaCorrente();
 
 	// PARA FAZER OS TESTES DE DOMINIO
-	if(result == false)
+	if(result == TU::FALHA)
 		return 1;
 	else
 	{
-		for(i = 0; i < TESTES_DOMINIO && result == true; i++)
+		for(i = 0; i < TESTES_DOMINIO && result == TU::SUCESSO; i++)
 			switch(i)
 			{
 			case 0:
@@ -93,11 +108,11 @@ int main()
 			}
 	}
 	// PARA FAZER OS TESTES DE ENTIDADE
-	if(result == false)
+	if(result == TU::FALHA)
 		std::cout << "Parado no teste " << i << std::endl;
 	else
 	{
-		for(i = 0; i < TESTES_ENTIDADE && result; i++)
+		for(i = 0; i < TESTES_ENTIDADE && result == TU::SUCESSO; i++)
 			switch(i)
 			{
 			case 0:
@@ -105,15 +120,15 @@ int main()
 				result = tuusuario.run();
 				break;
 			case 1:
-				std::cout << "***** Teste de Usuário *****" << std::endl;
+				std::cout << "***** Teste de Acomodacao *****" << std::endl;
 				result = tuacomodacao.run();
 				break;
 			case 2:
-				std::cout << "***** Teste de Usuário *****" << std::endl;
+				std::cout << "***** Teste de Cartao de Credito *****" << std::endl;
 				result = tucartaocredito.run();
 				break;
 			case 3:
-				std::cout << "***** Teste de Usuário *****" << std::endl;
+				std::cout << "***** Teste de Conta Corrente *****" << std::endl;
 				result = tucontacorrente.run();
 				break;
 			}

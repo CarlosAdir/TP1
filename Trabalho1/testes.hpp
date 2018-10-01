@@ -9,22 +9,24 @@ class TU
 {
 private:
     int numerador;
-protected:
     int denominador;
+protected:
     bool result;
     void print_result(const std::string, const bool);
+    void print_final_result(const bool);
+    void set_denominador(int);
 public:
-    const static bool VERBOSE = true;
+    static bool VERBOSE;
     const static bool SUCESSO = true;
     const static bool FALHA   = false;
     TU();
-    void setUp();
-    void testarCenarioSucesso();
-    void testarCenarioFalha();
-    void tearDown();
-    bool run();
-    
+	// void setUp();
+	// void testarCenarioSucesso();
+	// void testarCenarioFalha();
+	// void tearDown();
+	// bool run();  
 };
+
 
 class TUAgencia:public TU
 {
@@ -39,7 +41,9 @@ private:
     const static std::string AGENCIA_INVALIDA(){return "asd1a";}
 public:
     bool run();
+    TUAgencia();
 };
+
 
 class TUBanco:public TU
 {
@@ -54,6 +58,7 @@ private:
     const static std::string BANCO_INVALIDO(){return "a1d";}
 public:
     bool run();
+    TUBanco();
 };
 
 
@@ -70,7 +75,9 @@ private:
     const static int CAPACIDADE_INVALIDA(){return 120;}
 public:
     bool run();
+    TUCapacidadeAcomodacao();
 };
+
 
 class TUDiaria:public TU
 {
@@ -85,7 +92,9 @@ private:
     const static double DIARIA_INVALIDA(){return 0.1;}
 public:
     bool run();
+    TUDiaria();
 };
+
 
 class TUData:public TU
 {
@@ -96,11 +105,17 @@ private:
     void testarCenarioFalha();
     void tearDown();
 
-    //const static double DATA_VALIDA(){return 10.1;}
-    //const static double DATA_INVALIDA(){return 0.1;}
+    const static int DIA_VALIDO(){return 2;}
+    const static int DIA_INVALIDO(){return 32;}
+    const static std::string MES_VALIDO(){return "ago";}
+    const static std::string MES_INVALIDO(){return "deu";}
+    const static int ANO_VALIDO(){return 2001;}
+    const static int ANO_INVALIDO(){return 1999;}
 public:
     bool run();
+    TUData();
 };
+
 
 class TUDataValidade:public TU
 {
@@ -111,11 +126,15 @@ private:
     void testarCenarioFalha();
     void tearDown();
 
-    //const static double DATA_VALIDA(){return 10.1;}
-    //const static double DATA_INVALIDA(){return 0.1;}
+    const static int MES_VALIDO(){return 1;}
+    const static int MES_INVALIDO(){return 0;}
+    const static int ANO_VALIDO(){return 95;}
+    const static int ANO_INVALIDO(){return 100;}
 public:
     bool run();
+    TUDataValidade();
 };
+
 
 class TUEstado:public TU
 {
@@ -130,7 +149,9 @@ private:
     const static std::string ESTADO_INVALIDO(){return "PT";}
 public:
     bool run();
+    TUEstado();
 };
+
 
 class TUIdentificador:public TU
 {
@@ -145,7 +166,9 @@ private:
     const static std::string IDENTIFICADOR_INVALIDO(){return "PTkMe";}
 public:
     bool run();
+    TUIdentificador();
 };
+
 
 class TUNome:public TU
 {
@@ -160,7 +183,9 @@ private:
     const static std::string NOME_INVALIDO(){return "..123.";}
 public:
     bool run();
+    TUNome();
 };
+
 
 class TUNumeroCartaoCredito:public TU
 {
@@ -171,11 +196,13 @@ private:
     void testarCenarioFalha();
     void tearDown();
 
-    const static std::string NUMEROCARTAOCREDITO_VALIDO(){return "1234567890123456";}
-    const static std::string NUMEROCARTAOCREDITO_INVALIDO(){return "123456789012345A";}
+    const static std::string NUMEROCARTAOCREDITO_VALIDO(){return "7992739871312342";}
+    const static std::string NUMEROCARTAOCREDITO_INVALIDO(){return "1234567890123451";}
 public:
     bool run();
+    TUNumeroCartaoCredito();
 };
+
 
 class TUNumeroContaCorrente:public TU
 {
@@ -190,7 +217,9 @@ private:
     const static std::string NUMEROCONTACORRENTE_INVALIDO(){return "12345A";}
 public:
     bool run();
+    TUNumeroContaCorrente();
 };
+
 
 class TUSenha:public TU
 {
@@ -205,7 +234,9 @@ private:
     const static std::string SENHA_INVALIDA(){return "asDDk12#";}
 public:
     bool run();
+    TUSenha();
 };
+
 
 class TUTipoAcomodacao:public TU
 {
@@ -220,7 +251,9 @@ private:
     const static std::string TIPOACOMODACAO_INVALIDA(){return "Que";}
 public:
     bool run();
+    TUTipoAcomodacao();
 };
+
 
 
 
@@ -240,17 +273,18 @@ public:
     bool run();
 };
 
+
 class TUAcomodacao:public TU
 {
 private:
     Acomodacao *acomodacao;
     void setUp();
     void tearDown();
-
 public:
     TUAcomodacao();
     bool run();
 };
+
 
 class TUCartaoCredito:public TU
 {
@@ -258,11 +292,11 @@ private:
     CartaoCredito *cartaocredito;
     void setUp();
     void tearDown();
-
 public:
     TUCartaoCredito();
     bool run();
 };
+
 
 class TUContaCorrente:public TU
 {
@@ -270,7 +304,6 @@ private:
     ContaCorrente *contacorrente;
     void setUp();
     void tearDown();
-
 public:
     TUContaCorrente();
     bool run();
