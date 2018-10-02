@@ -7,7 +7,7 @@ using namespace std;
 
 /**
 * \class TU
-*  
+*
 *  The initial Test-Unit class to create classes through inheritance to test other classes implemented.
 *
 *  The class is the base to create another TU classes through inheritance. These other TU classes will be used to test the other classes on <b>dominios.hpp</b> and <b>entidades.hpp</b>.
@@ -60,10 +60,10 @@ void TU::print_final_result(const bool result)
 
 /**
 * \class TUAgencia
-*  
+*
 *  The Test-Unit class to test the class Agencia.
 *
-*  
+*
 */
 TUAgencia::TUAgencia()
 {
@@ -119,10 +119,10 @@ bool TUAgencia::run()
 
 /**
 * \class TUBanco
-*  
+*
 *  The Test-Unit class to test the class Banco.
 *
-*  
+*
 */
 TUBanco::TUBanco()
 {
@@ -179,10 +179,10 @@ bool TUBanco::run()
 // Classe derivada de teste de unidade do Capacidade de Acomodacao
 /**
 * \class TUCapacidadeAcomodacao
-*  
+*
 *  The Test-Unit class to test the class CapacidadeAcomodacao.
 *
-*  
+*
 */
 TUCapacidadeAcomodacao::TUCapacidadeAcomodacao()
 {
@@ -238,10 +238,10 @@ bool TUCapacidadeAcomodacao::run()
 
 /**
 * \class TUDiaria
-*  
+*
 *  The Test-Unit class to test the class Diaria.
 *
-*  
+*
 */
 TUDiaria::TUDiaria()
 {
@@ -297,10 +297,10 @@ bool TUDiaria::run()
 
 /**
 * \class TUData
-*  
+*
 *  The Test-Unit class to test the class Data.
 *
-*  
+*
 */
 TUData::TUData()
 {
@@ -358,10 +358,10 @@ bool TUData::run()
 
 /**
 * \class TUDataValidade
-*  
+*
 *  The Test-Unit class to test the class DataValidade.
 *
-*  
+*
 */
 TUDataValidade::TUDataValidade()
 {
@@ -417,10 +417,10 @@ bool TUDataValidade::run()
 
 /**
 * \class TUEstado
-*  
+*
 *  The Test-Unit class to test the class Estado.
 *
-*  
+*
 */
 TUEstado::TUEstado()
 {
@@ -476,10 +476,10 @@ bool TUEstado::run()
 
 /**
 * \class TUIdentificador
-*  
+*
 *  The Test-Unit class to test the class Identificador.
 *
-*  
+*
 */
 TUIdentificador::TUIdentificador()
 {
@@ -535,10 +535,10 @@ bool TUIdentificador::run()
 
 /**
 * \class TUNome
-*  
+*
 *  The Test-Unit class to test the class Nome.
 *
-*  
+*
 */
 TUNome::TUNome()
 {
@@ -594,10 +594,10 @@ bool TUNome::run()
 
 /**
 * \class TUNumeroCartaoCredito
-*  
+*
 *  The Test-Unit class to test the class NumeroCartaoCredito.
 *
-*  
+*
 */
 TUNumeroCartaoCredito::TUNumeroCartaoCredito()
 {
@@ -653,10 +653,10 @@ bool TUNumeroCartaoCredito::run()
 
 /**
 * \class TUNumeroContaCorrente
-*  
+*
 *  The Test-Unit class to test the class NumeroContaCorrente.
 *
-*  
+*
 */
 TUNumeroContaCorrente::TUNumeroContaCorrente()
 {
@@ -712,10 +712,10 @@ bool TUNumeroContaCorrente::run()
 
 /**
 * \class TUSenha
-*  
+*
 *  The Test-Unit class to test the class Senha.
 *
-*  
+*
 */
 TUSenha::TUSenha()
 {
@@ -771,10 +771,10 @@ bool TUSenha::run()
 
 /**
 * \class TUTipoAcomodacao
-*  
+*
 *  The Test-Unit class to test the class TipoAcomodacao.
 *
-*  
+*
 */
 TUTipoAcomodacao::TUTipoAcomodacao()
 {
@@ -830,10 +830,10 @@ bool TUTipoAcomodacao::run()
 
 /**
 * \class TUUsuario
-*  
+*
 *  The Test-Unit class to test the class Usuario.
 *
-*  
+*
 */
 TUUsuario::TUUsuario()
 {
@@ -863,10 +863,10 @@ bool TUUsuario::run()
 
 /**
 * \class TUAcomodacao
-*  
+*
 *  The Test-Unit class to test the class Acomodacao.
 *
-*  
+*
 */
 TUAcomodacao::TUAcomodacao()
 {
@@ -896,10 +896,10 @@ bool TUAcomodacao::run()
 
 /**
 * \class TUCartaoCredito
-*  
+*
 *  The Test-Unit class to test the class CartaoCredito.
 *
-*  
+*
 */
 TUCartaoCredito::TUCartaoCredito()
 {
@@ -929,10 +929,10 @@ bool TUCartaoCredito::run()
 
 /**
 * \class TUContaCorrente
-*  
+*
 *  The Test-Unit class to test the class ContaCorrente.
 *
-*  
+*
 */
 TUContaCorrente::TUContaCorrente()
 {

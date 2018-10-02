@@ -2,7 +2,7 @@
 #include "testes.hpp"
 
 
-/*! \mainpage Trabalho 1 - Técnicas de Programação 1 - Trabalho 1 
+/*! \mainpage Trabalho 1 - Técnicas de Programação 1 - Trabalho 1
  *
  * \section intro_sec Introduction
  *
@@ -15,7 +15,7 @@
  * etc...
  */
 
-bool TU::VERBOSE = false;
+bool TU::VERBOSE = true;
 
 int main()
 {

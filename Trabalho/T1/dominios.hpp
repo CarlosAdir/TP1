@@ -11,9 +11,9 @@ class Agencia
 private:
 	std::string agencia;
 	void validar(std::string) throw (std::invalid_argument);
-	static const bool VERBOSE = false; 
+	static const bool VERBOSE = false;
 public:
-	
+
 	void set(std::string agencia) throw (std::invalid_argument); /**< Try to set the agencia number on the object */
 	std::string get(); /**< Returns Agencia's string with 5 digits. */
 	// Agencia(std::string);

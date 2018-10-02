@@ -2,10 +2,10 @@
 
 /**
 * \class Agencia
-*  
+*
 *  A base class to store a bank branch number.
 *
-*  The class is only to store the bank branch number and this class verifies if the number set is possible.  
+*  The class is only to store the bank branch number and this class verifies if the number set is possible.
 */
 // Agencia::Agencia(std::string agencia)
 // {set(agencia);}
@@ -25,7 +25,7 @@ void Agencia::set(std::string agencia) throw (std::invalid_argument)
 	/**
 	* If is not possible to set, it is only because the given data is not valid.
 	* In that case, the system will throw an exception called <b>std::invalid_argument</b>.
-	* Some possible examples are shown on the table below. 
+	* Some possible examples are shown on the table below.
 	*
 	* | CORRECT | WRONG  |
 	* |---------|--------|
@@ -36,7 +36,7 @@ void Agencia::set(std::string agencia) throw (std::invalid_argument)
 	* \param[in] agencia is the string to set on the object and must have 5 digits(characteres from 0 to 9).
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(agencia);
 	this->agencia = agencia;
@@ -46,7 +46,7 @@ std::string Agencia::get()
 	/**
 	* Returns the string number from the object.
 	* This string is composed for exactly for 5 digits.
-	* It is possible the frist character be 0. 
+	* It is possible the frist character be 0.
 	*/
 	return agencia;
 }
@@ -57,10 +57,10 @@ std::string Agencia::get()
 
 /**
 * \class Banco
-*  
+*
 *  A base class to store a bank number.
 *
-*  The class is only to store the bank number and this class verifies if the number set is possible.  
+*  The class is only to store the bank number and this class verifies if the number set is possible.
 */
 // Banco::Banco(std::string banco)
 // {set(banco);}
@@ -91,7 +91,7 @@ void Banco::set(std::string banco) throw (std::invalid_argument)
 	* \param[in] banco is the string to set on the object and must have 3 digits(characteres from 0 to 9).
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(banco);
 	this->banco = banco;
@@ -101,7 +101,7 @@ std::string Banco::get()
 	/**
 	* Returns the string number from the object.
 	* This string is composed for exactly for 3 digits.
-	* It is possible the frist character be 0. 
+	* It is possible the frist character be 0.
 	*/
 	return banco;
 }
@@ -109,7 +109,7 @@ std::string Banco::get()
 
 /**
 * \class CapacidadeAcomodacao
-*  
+*
 *  A base class to store a accomodation capacity number.
 *
 *  The class is only to store the accommodation capacity number and this class verifies if the number set is possible, if the number is between 1 and 9.
@@ -139,7 +139,7 @@ void CapacidadeAcomodacao::set(int valor) throw (std::invalid_argument)
 	* \param[in] valor is the int to set on the object and must be between 1 and 9.
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(valor);
 	this->valor = valor;
@@ -162,10 +162,10 @@ int CapacidadeAcomodacao::get()
 
 /**
 * \class Diaria
-*  
+*
 *  A base class to store a diaria price.
 *
-*  The class is only to store the Diaria's price and this class verifies if the value set is possible.  
+*  The class is only to store the Diaria's price and this class verifies if the value set is possible.
 */
 Diaria::Diaria()
 {}
@@ -209,10 +209,10 @@ double Diaria::get()
 
 /**
 * \class Data
-*  
+*
 *  A base class to store a date.
 *
-*  The class is only to store the date with day, month and year. This class verifies if the date set is a possible, inclusive if it is a leap year.  
+*  The class is only to store the date with day, month and year. This class verifies if the date set is a possible, inclusive if it is a leap year.
 */
 Data::Data()
 {}
@@ -225,7 +225,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	if(mes == "jan")
 	{
 		// Mes ja tem 31 dias no maximo
-	}	
+	}
 	else if(mes == "fev")
 	{
 		if(ano%4 == 0)
@@ -242,7 +242,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "mar")
 	{
 		// Mes ja tem 31 dias no maximo
-	}	
+	}
 	else if(mes == "abr")
 	{
 		if(dia > 30)
@@ -251,7 +251,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "mai")
 	{
 		// Mes ja tem 31 dias no maximo
-	}	
+	}
 	else if(mes == "jun")
 	{
 		if(dia > 30)
@@ -260,7 +260,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "jul")
 	{
 		// Mes ja tem 31 dias no maximo
-	}	
+	}
 	else if(mes == "ago")
 	{
 		// Mes ja tem 31 dias no maximo
@@ -269,16 +269,16 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	{
 		if(dia > 30)
 			throw std::invalid_argument("Argumento invalido.");
-	}	
+	}
 	else if(mes == "out")
 	{
-		// Mes ja tem 31 dias no maximo	
+		// Mes ja tem 31 dias no maximo
 	}
 	else if(mes == "nov")
 	{
 		if(dia > 30)
 			throw std::invalid_argument("Argumento invalido.");
-	}	
+	}
 	else if(mes == "dez")
 	{
 		// Mes ja tem 31 dias no maximo
@@ -304,7 +304,7 @@ void Data::set(int dia, std::string mes, int ano) throw (std::invalid_argument)
 	* \param[in] ano is the year and must be be on the interval [2000, 2099].
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(dia, mes, ano);
 	this->dia = dia;
@@ -343,7 +343,7 @@ int Data::getAno()
 
 /**
 * \class DataValidade
-*  
+*
 *  A base class to store a validation date.
 *
 *  The class is only to store the date with month and year, both as number. This class verifies if the date set is a possible.
@@ -375,7 +375,7 @@ void DataValidade::set(int mes, int ano) throw (std::invalid_argument)
 	* \param[in] ano is the year and must be on the interval [0, 99].
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(mes, ano);
 	this->mes = mes;
@@ -404,7 +404,7 @@ int DataValidade::getAno()
 
 /**
 * \class Estado
-*  
+*
 *  A base class to store a state of Brazil.
 *
 *  The class is only to store the state of Brazil. This class verifies if the state set is a possible state of Brazil.
@@ -438,7 +438,7 @@ void Estado::set(std::string estado) throw (std::invalid_argument)
 	* \param[in] estado is the region inside a country, and must be one of them: AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO.
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(estado);
 	this->estado = estado;
@@ -460,7 +460,7 @@ std::string Estado::get()
 
 /**
 * \class Identificador
-*  
+*
 *  A base class to store a identificator.
 *
 *  The class is only to store the identificator. This class verifies if the identificator set is a possible identificator with 5 lower case letters.
@@ -492,7 +492,7 @@ void Identificador::set(std::string identificador) throw (std::invalid_argument)
 	* \param[in] identificador is the string to set on the object and must have 5 small letters(characteres from \a a to \a z).
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(identificador);
 	this->identificador = identificador;
@@ -513,7 +513,7 @@ std::string Identificador::get()
 
 /**
 * \class Nome
-*  
+*
 *  A base class to store a name.
 *
 *  The class is only to store a name. This class verifies if the name set is a possible name.
@@ -552,7 +552,7 @@ void Nome::set(std::string nome) throw (std::invalid_argument)
 	* 							There is no limit to the name size.
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(nome);
 	this->nome = nome;
@@ -573,7 +573,7 @@ std::string Nome::get()
 
 /**
 * \class NumeroCartaoCredito
-*  
+*
 *  A base class to store a credit card number.
 *
 *  The class is only to store a credit card number. This class verifies if the number set is a possible 16 digit credit card number according the Luhn algorithm.
@@ -587,8 +587,8 @@ void NumeroCartaoCredito::validar(std::string numerocartaocredito) throw (std::i
 		throw std::invalid_argument("Argumento invalido.");
 	for(i = 0; i < n; i++)
 		if(!isdigit(numerocartaocredito[i]))
-			throw std::invalid_argument("Argumento invalido.");	
-	
+			throw std::invalid_argument("Argumento invalido.");
+
 	int nSum       = 0;
     int nParity    = (n-1) % 2;
     int nDigit;
@@ -607,7 +607,7 @@ void NumeroCartaoCredito::set(std::string numerocartaocredito) throw (std::inval
 	/**
 	* If is not possible to set, it is only because the given data is not valid.
 	* In that case, the system will throw an exception called <b>std::invalid_argument</b>.
-	* Some possible examples are shown on the table below. 
+	* Some possible examples are shown on the table below.
 	*
 	* |      CORRECT     |       WRONG      |
 	* |------------------|------------------|
@@ -618,7 +618,7 @@ void NumeroCartaoCredito::set(std::string numerocartaocredito) throw (std::inval
 	* \param[in] agencia is the string to set on the object and must have 16 digits(characteres from 0 to 9) and checked by the Luhn algorithm.
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(numerocartaocredito);
 	this->numerocartaocredito = numerocartaocredito;
@@ -635,13 +635,13 @@ std::string NumeroCartaoCredito::get()
 
 
 
-	
-	
-	
+
+
+
 
 /**
 * \class NumeroContaCorrente
-  
+
   A base class to store a account number.
 
   The class is only to store a account number. This class verifies if the number set is a possible 6 digit account number.
@@ -655,14 +655,14 @@ void NumeroContaCorrente::validar(std::string numerocontacorrente) throw (std::i
 		throw std::invalid_argument("Argumento invalido.");
 	for(i = 0; i < n; i++)
 		if(!isdigit(numerocontacorrente[i]))
-			throw std::invalid_argument("Argumento invalido.");	
+			throw std::invalid_argument("Argumento invalido.");
 }
 void NumeroContaCorrente::set(std::string numerocontacorrente) throw (std::invalid_argument)
 {
 	/**
 	* If is not possible to set, it is only because the given data is not valid.
 	* In that case, the system will throw an exception called <b>std::invalid_argument</b>.
-	* Some possible examples are shown on the table below. 
+	* Some possible examples are shown on the table below.
 	*
 	* | CORRECT |  WRONG  |
 	* |---------|---------|
@@ -673,7 +673,7 @@ void NumeroContaCorrente::set(std::string numerocontacorrente) throw (std::inval
 	* \param[in] numerocontacorrente is the string to set on the object and must have 6 digits(characteres from 0 to 9).
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(numerocontacorrente);
 	this->numerocontacorrente = numerocontacorrente;
@@ -683,7 +683,7 @@ std::string NumeroContaCorrente::get()
 	/**
 	* Returns the string number from the object.
 	* This string is composed for exactly for 6 digits.
-	* It is possible the frist character be 0. 
+	* It is possible the frist character be 0.
 	*/
 	return numerocontacorrente;
 }
@@ -694,7 +694,7 @@ std::string NumeroContaCorrente::get()
 
 /**
 * \class Senha
-  
+
   A base class to store a password.
 
   The class is only to store a password. This class verifies if the password set is a possible with 8 characters.
@@ -730,7 +730,7 @@ void Senha::set(std::string senha) throw (std::invalid_argument)
 	/**
 	* If is not possible to set, it is only because the given data is not valid.
 	* In that case, the system will throw an exception called <b>std::invalid_argument</b>.
-	* Some possible examples are shown on the table below. 
+	* Some possible examples are shown on the table below.
 	*
 	* | CORRECT  |  WRONG   |
 	* |----------|----------|
@@ -740,10 +740,10 @@ void Senha::set(std::string senha) throw (std::invalid_argument)
 	*
 	* \param[in] senha is the string to set on the object and must have 8 characteres,
 						at least a symbol(! # $ % &), a lower case letter(a-z), a upper case letter(A-Z) and a digit(0-9).
-						Must not have repeated character. 
+						Must not have repeated character.
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(senha);
 	this->senha = senha;
@@ -768,7 +768,7 @@ std::string Senha::get()
 
 /**
 * \class TipoAcomodacao
-  
+
   A base class to store a accomodation type.
 
   The class is only to store a accomodation type. This class verifies if the accomodation type set is valid.
@@ -776,7 +776,7 @@ std::string Senha::get()
 TipoAcomodacao::TipoAcomodacao()
 {}
 void TipoAcomodacao::validar(std::string tipoacomodacao) throw (std::invalid_argument)
-{	
+{
 	if(tipoacomodacao != "Casa" && tipoacomodacao != "Apartamento" && tipoacomodacao != "Flat")
 		throw std::invalid_argument("Argumento invalido.");
 }
@@ -785,7 +785,7 @@ void TipoAcomodacao::set(std::string tipoacomodacao) throw (std::invalid_argumen
 	/**
 	* If is not possible to set, it is only because the given data is not valid.
 	* In that case, the system will throw an exception called <b>std::invalid_argument</b>.
-	* Some possible examples are shown on the table below. 
+	* Some possible examples are shown on the table below.
 	*
 	* |   CORRECT   |  WRONG   |
 	* |-------------|----------|
@@ -796,7 +796,7 @@ void TipoAcomodacao::set(std::string tipoacomodacao) throw (std::invalid_argumen
 	* \param[in] tipoacomodacao is the string to set on the object and must be one of them: Apartamento, Casa or Flat.
 	*
     * \throw std::invalid_argument Exception thrown when the parameters are not valid data.
-    *								Some valid data are shown on the table above. 
+    *								Some valid data are shown on the table above.
 	*/
 	validar(tipoacomodacao);
 	this->tipoacomodacao = tipoacomodacao;

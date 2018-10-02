@@ -14,7 +14,7 @@ public:
 	~Usuario();
 };
 
-	
+
 class Acomodacao
 {
 private:
