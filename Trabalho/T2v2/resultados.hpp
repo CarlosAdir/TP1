@@ -29,22 +29,21 @@ class ResultadoCadastro:public Resultado
 
 };
 
-// class ResultadoAutenticar:public Resultado
-// {
+class ResultadoAutenticacao:public Resultado
+{
+
+};
+
+class ResultadoAcomodacao:public Resultado
+{
 
 
-// };
+};
 
-// class ResultadoAcomodacao:public Resultado
-// {
-
-
-// };
-
-// class ResultadoReserva:public Resultado
-// {
+class ResultadoLogado:public Resultado
+{
 
 
-// };
+};
 
 #endif

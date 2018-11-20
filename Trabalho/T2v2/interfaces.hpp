@@ -28,13 +28,16 @@ public:
 class IU  // Classe base para interface do usuario - IU = Interface User
 {
 public:
+    virtual ~IU(){};
     virtual void verifica_consistencia() throw (consistencia_error) = 0;
-    
+    virtual void libera() = 0;
 };
 class ILN // Classe base para servicos - ILN = 
 {
 public:
+    virtual ~ILN(){};
     virtual void verifica_consistencia() throw (consistencia_error) = 0;
+    virtual void libera() = 0;
 };
 
 
@@ -148,22 +151,29 @@ class IUDeletarConta;
 
 class IUInicializacao:public IU{
 public:
+    virtual ~IUInicializacao(){};
+    virtual void inicio() = 0;
     virtual void setCntrIUCadastro(IUCadastro *) = 0;
     virtual void setCntrIUAutenticacao(IUAutenticacao *) = 0;
     virtual void setCntrIUAcomodacao(IUAcomodacao *) = 0;
 };
 class IUCadastro:public IU{
 public:
+    virtual ~IUCadastro(){};
     virtual void setCntrILNCadastro(ILNCadastro *) = 0;
     virtual void setCntrIULogado(IULogado *) = 0;
 };
 class IUAutenticacao:public IU{ // Onde realiza o login. No esquematico eh o terceiro bloco
 public:    
+    virtual ~IUAutenticacao(){};
     virtual void setCntrILNAutenticacao(ILNAutenticacao *) = 0;
     virtual void setCntrIULogado(IULogado *) = 0;
+
+    virtual void autenticar() = 0;
 };
 class IULogado:public IU{
 public:
+    virtual ~IULogado(){};
     virtual void setCntrIUAcomodacao(IUAcomodacao *) = 0;
     virtual void setCntrIUReserva(IUReserva *) = 0;
     virtual void setCntrIUCadastroAcomodacao(IUCadastroAcomodacao *) = 0;
@@ -171,18 +181,22 @@ public:
 };
 class IUAcomodacao:public IU{
 public:
+    virtual ~IUAcomodacao(){};
     virtual void setCntrILNAcomodacao(ILNAcomodacao *) = 0;
 };
 class IUReserva:public IU{
 public:
+    virtual ~IUReserva(){};
     virtual void setCntrILNReserva(ILNReserva *) = 0;
 };
 class IUCadastroAcomodacao:public IU{
 public:
+    virtual ~IUCadastroAcomodacao(){};
     virtual void setCntrILNCadastroAcomodacao(ILNCadastroAcomodacao *) = 0;
 };
 class IUDados:public IU{
 public:
+    virtual ~IUDados(){};
     virtual void setCntrIUCartao(IUCartao *) = 0;
     virtual void setCntrIUContaCorrente(IUContaCorrente *) = 0;
     virtual void setCntrIUAlterarSenha(IUAlterarSenha *) = 0;
@@ -191,23 +205,29 @@ public:
 };
 class IUCartao:public IU{
 public:
+    virtual ~IUCartao(){};
     virtual void setCntrILNCartao(ILNCartao *) = 0;
 };
 class IUContaCorrente:public IU{
 public:
+    virtual ~IUContaCorrente(){};
     virtual void setCntrILNContaCorrente(ILNContaCorrente *) = 0;
 };
 class IUAlterarSenha:public IU{
 public:
+    virtual ~IUAlterarSenha(){};
     virtual void setCntrILNAlterarSenha(ILNAlterarSenha *) = 0;
 };
 class IUAlterarNome:public IU{
 public:
+    virtual ~IUAlterarNome(){};
     virtual void setCntrILNAlterarNome(ILNAlterarNome *) = 0;
 };
 class IUDeletarConta:public IU{
 public:
+    virtual ~IUDeletarConta(){};
     virtual void setCntrILNDeletarConta(ILNDeletarConta *) = 0;
 };
+
 
 #endif

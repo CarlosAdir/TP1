@@ -106,7 +106,6 @@ bool teste_dominio()
 			break;
 		}
 	return result;
-
 }
 
 bool teste_entidade()
@@ -204,27 +203,15 @@ IUInicializacao *initial_setting()
 
 int main()
 {
+	IUInicializacao *cntrIUInicio;
 	// teste_dominio();
 	// teste_entidade();
-	
-	IUInicializacao *cntrIUInicio;
-
 	cntrIUInicio = initial_setting();
+	// cntrIUInicio->verifica_consistencia();
 	
-	cntrIUInicio->verifica_consistencia();
-	// inicio->menu_principal();
-	
- //    delete cntrIUAutenticacao;
-	// delete cntrIUUsuario;
-	// delete cntrIUAcomodacao;
-	// delete cntrIUReserva;
-	
-	// delete cntrILNAutenticacao; 
-	// delete cntrILNUsuario;
-	// delete cntrILNAcomodacao;
-	// delete cntrILNReserva;
+	cntrIUInicio->inicio();
 
-	// delete inicio;
+	// cntrIUInicio->libera();
 
 	return 0;
 }

@@ -1,5 +1,6 @@
 #include "controladoras.hpp"
 
+#include "input_data.hpp"
 // Definições de métodos da classe CntrIUAutenticacao.
 
 std::string red(std::string message)
@@ -10,6 +11,16 @@ std::string green(std::string message)
 {
     return "\033[1;32m" + message + "\033[0m";
 }
+void limpar_tela()
+{
+	system("clear");
+}
+
+
+
+
+
+
 
 
 CntrIUInicializacao::CntrIUInicializacao()
@@ -18,18 +29,7 @@ CntrIUInicializacao::CntrIUInicializacao()
 	cntrIUAutenticacao = NULL;
 	cntrIUAcomodacao = NULL;
 }
-void inline CntrIUInicializacao::setCntrIUCadastro(IUCadastro *cntrIUCadastro)
-{
-	this->cntrIUCadastro = cntrIUCadastro;
-}
-void inline CntrIUInicializacao::setCntrIUAutenticacao(IUAutenticacao *cntrIUAutenticacao)
-{
-	this->cntrIUAutenticacao = cntrIUAutenticacao;
-}
-void inline CntrIUInicializacao::setCntrIUAcomodacao(IUAcomodacao *cntrIUAcomodacao)
-{
-	this->cntrIUAcomodacao = cntrIUAcomodacao;
-}
+CntrIUInicializacao::~CntrIUInicializacao(){}
 void CntrIUInicializacao::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrIUCadastro == NULL)
@@ -54,53 +54,70 @@ void CntrIUInicializacao::verifica_consistencia() throw (consistencia_error)
 		cntrIUAcomodacao->verifica_consistencia();
 	}
 }
+void CntrIUInicializacao::libera()
+{
+	if(cntrIUCadastro != NULL)
+	{
+		cntrIUCadastro->libera();
+		delete cntrIUCadastro;
+		cntrIUCadastro = NULL;
+	}
+	if(cntrIUAutenticacao != NULL)
+	{
+		cntrIUAutenticacao->libera();
+		delete cntrIUAutenticacao;
+		cntrIUAutenticacao = NULL;
+	}
+	if(cntrIUAcomodacao != NULL)
+	{
+		cntrIUAcomodacao->libera();
+		delete cntrIUAcomodacao;
+		cntrIUAcomodacao = NULL;
+	}
+}
+
+void inline CntrIUInicializacao::setCntrIUCadastro(IUCadastro *cntrIUCadastro)
+{
+	this->cntrIUCadastro = cntrIUCadastro;
+}
+void inline CntrIUInicializacao::setCntrIUAutenticacao(IUAutenticacao *cntrIUAutenticacao)
+{
+	this->cntrIUAutenticacao = cntrIUAutenticacao;
+}
+void inline CntrIUInicializacao::setCntrIUAcomodacao(IUAcomodacao *cntrIUAcomodacao)
+{
+	this->cntrIUAcomodacao = cntrIUAcomodacao;
+}
+void CntrIUInicializacao::inicio()
+{
+	char c;
+	while(true)
+	{
+		apresentarOpcoes();
+		c = getch();
+		if(c == B_AUTENTICAR){
+			cntrIUAutenticacao->autenticar();
+		}
+		else if(c == B_CADASTRAR){
+			// cntrIUUsuario->menu();
+		}
+		else if(c == B_ACOMODACAO){
+			//
+		}
+		else if(c == B_SAIR)
+			break;
+    }
+}
 void CntrIUInicializacao::apresentarOpcoes()
 {
-	int choose;
-	bool loop = true;
-	while(loop)
-	{
-		try
-		{
-			std::cout << std::endl << "Tela de apresentacao de sistema." << std::endl;
+	limpar_tela();
+	std::cout << std::endl << "Tela de apresentacao de sistema." << std::endl;
 
-			std::cout << "1) Autenticar" << std::endl;
-			std::cout << "2) Cadastros" << std::endl;
-			std::cout << "3) Acomodacao" << std::endl;
-			std::cout << "4) Reserva" << std::endl;
-			std::cout << std::endl;
-			std::cout << "0) Sair" << std::endl;
-
-			std::cin >> choose;
-
-			switch(choose)
-			{
-				case 1:
-					// cntrIUAutenticacao->autenticar();
-					break;
-				case 2:
-					// cntrIUUsuario->menu();
-					break;
-				case 3:
-					// cntrIUAcomodacao->acomodar();
-					break;
-				case 4:
-					// cntrIUReserva->reservar();
-					break;
-				case 0:
-					// std::cout << "Escolha Sair" << std::endl;
-					loop = false;
-					break;
-				default:
-					throw std::invalid_argument("Opcao Invalida");
-
-			}
-		}
-		catch(std::invalid_argument &e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-    }
+	std::cout << B_AUTENTICAR << ") Autenticar" << std::endl;
+	std::cout << B_CADASTRAR  << ") Cadastrar" << std::endl;
+	std::cout << B_ACOMODACAO << ") Acomodacao" << std::endl;
+	std::cout << std::endl;
+	std::cout << B_SAIR << ") Sair" << std::endl;
 }
 
 
@@ -112,14 +129,7 @@ CntrIUCadastro::CntrIUCadastro()
 	cntrILNCadastro = NULL;
 	cntrIULogado = NULL;
 }
-void inline CntrIUCadastro::setCntrILNCadastro(ILNCadastro *cntrILNCadastro)
-{
-	this->cntrILNCadastro = cntrILNCadastro;
-}
-void inline CntrIUCadastro::setCntrIULogado(IULogado *cntrIULogado)
-{
-	this->cntrIULogado = cntrIULogado;
-}
+CntrIUCadastro::~CntrIUCadastro(){}
 void CntrIUCadastro::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNCadastro == NULL)
@@ -137,6 +147,29 @@ void CntrIUCadastro::verifica_consistencia() throw (consistencia_error)
 		cntrIULogado->verifica_consistencia();
 	}
 }
+void CntrIUCadastro::libera()
+{
+	if(cntrILNCadastro != NULL)
+	{
+		cntrILNCadastro->libera();
+		delete cntrILNCadastro;
+		cntrILNCadastro = NULL;
+	}
+	if(cntrIULogado != NULL)
+	{
+		// cntrIULogado->libera();
+		delete cntrIULogado;
+		cntrIULogado = NULL;
+	}
+}
+void inline CntrIUCadastro::setCntrILNCadastro(ILNCadastro *cntrILNCadastro)
+{
+	this->cntrILNCadastro = cntrILNCadastro;
+}
+void inline CntrIUCadastro::setCntrIULogado(IULogado *cntrIULogado)
+{
+	this->cntrIULogado = cntrIULogado;
+}
 
 
 
@@ -150,14 +183,7 @@ CntrIUAutenticacao::CntrIUAutenticacao()
 	cntrILNAutenticacao = NULL;
 	cntrIULogado = NULL;
 }
-void inline CntrIUAutenticacao::setCntrILNAutenticacao(ILNAutenticacao *cntrILNAutenticacao)
-{
-	this->cntrILNAutenticacao = cntrILNAutenticacao;
-}
-void inline CntrIUAutenticacao::setCntrIULogado(IULogado *cntrIULogado)
-{
-	this->cntrIULogado = cntrIULogado;
-}
+CntrIUAutenticacao::~CntrIUAutenticacao(){}
 void CntrIUAutenticacao::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNAutenticacao == NULL)
@@ -175,6 +201,39 @@ void CntrIUAutenticacao::verifica_consistencia() throw (consistencia_error)
 		cntrIULogado->verifica_consistencia();
 	}
 }
+void CntrIUAutenticacao::libera()
+{
+	if(cntrILNAutenticacao != NULL)
+	{
+		cntrILNAutenticacao->libera();
+		delete cntrILNAutenticacao;
+		cntrILNAutenticacao = NULL;
+	}
+	if(cntrIULogado != NULL)
+	{
+		cntrIULogado->libera(); // O erro esta aqui, ainda existe o ponteiro, mas o objeto ja foi deletado e entao ele tenta acessar uma memória ja desalocada
+		delete cntrIULogado;
+		cntrIULogado = NULL;
+	}
+}
+void inline CntrIUAutenticacao::setCntrILNAutenticacao(ILNAutenticacao *cntrILNAutenticacao)
+{
+	this->cntrILNAutenticacao = cntrILNAutenticacao;
+}
+void inline CntrIUAutenticacao::setCntrIULogado(IULogado *cntrIULogado)
+{
+	this->cntrIULogado = cntrIULogado;
+}
+void CntrIUAutenticacao::autenticar()
+{
+	std::cout << "Autenticou!!!" << std::endl;
+	while(kbhit())
+		getch();
+	getch();
+}
+
+
+
 
 
 CntrIULogado::CntrIULogado() 
@@ -184,22 +243,7 @@ CntrIULogado::CntrIULogado()
 	cntrIUCadastroAcomodacao = NULL;
 	cntrIUDados = NULL;
 }
-void inline CntrIULogado::setCntrIUAcomodacao(IUAcomodacao *cntrIUAcomodacao)
-{
-	this->cntrIUAcomodacao = cntrIUAcomodacao;
-}
-void inline CntrIULogado::setCntrIUReserva(IUReserva *cntrIUReserva)
-{
-	this->cntrIUReserva = cntrIUReserva;
-}
-void inline CntrIULogado::setCntrIUCadastroAcomodacao(IUCadastroAcomodacao *cntrIUCadastroAcomodacao)
-{
-	this->cntrIUCadastroAcomodacao = cntrIUCadastroAcomodacao;
-}
-void inline CntrIULogado::setCntrIUDados(IUDados *cntrIUDados)
-{
-	this->cntrIUDados = cntrIUDados;
-}
+CntrIULogado::~CntrIULogado(){}
 void CntrIULogado::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrIUAcomodacao == NULL)
@@ -231,6 +275,49 @@ void CntrIULogado::verifica_consistencia() throw (consistencia_error)
 		cntrIUDados->verifica_consistencia();
 	}
 }
+void CntrIULogado::libera()
+{
+	if(cntrIUAcomodacao != NULL)
+	{
+		// cntrIUAcomodacao->libera();
+		delete cntrIUAcomodacao;
+		cntrIUAcomodacao = NULL;
+	}
+	if(cntrIUReserva != NULL)
+	{
+		cntrIUReserva->libera();
+		delete cntrIUReserva;
+		cntrIUReserva = NULL;
+	}
+	if(cntrIUCadastroAcomodacao != NULL)
+	{
+		cntrIUCadastroAcomodacao->libera();
+		delete cntrIUCadastroAcomodacao;
+		cntrIUCadastroAcomodacao = NULL;
+	}
+	if(cntrIUDados != NULL)
+	{
+		cntrIUDados->libera();
+		delete cntrIUDados;
+		cntrIUDados = NULL;
+	}
+}
+void inline CntrIULogado::setCntrIUAcomodacao(IUAcomodacao *cntrIUAcomodacao)
+{
+	this->cntrIUAcomodacao = cntrIUAcomodacao;
+}
+void inline CntrIULogado::setCntrIUReserva(IUReserva *cntrIUReserva)
+{
+	this->cntrIUReserva = cntrIUReserva;
+}
+void inline CntrIULogado::setCntrIUCadastroAcomodacao(IUCadastroAcomodacao *cntrIUCadastroAcomodacao)
+{
+	this->cntrIUCadastroAcomodacao = cntrIUCadastroAcomodacao;
+}
+void inline CntrIULogado::setCntrIUDados(IUDados *cntrIUDados)
+{
+	this->cntrIUDados = cntrIUDados;
+}
 
 
 
@@ -240,10 +327,7 @@ CntrIUAcomodacao::CntrIUAcomodacao()
 {
 	cntrILNAcomodacao = NULL;	
 }
-void inline CntrIUAcomodacao::setCntrILNAcomodacao(ILNAcomodacao *cntrILNAcomodacao)
-{
-	this->cntrILNAcomodacao = cntrILNAcomodacao;
-}
+CntrIUAcomodacao::~CntrIUAcomodacao(){}
 void CntrIUAcomodacao::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNAcomodacao == NULL)
@@ -254,6 +338,19 @@ void CntrIUAcomodacao::verifica_consistencia() throw (consistencia_error)
 		cntrILNAcomodacao->verifica_consistencia();
 	}
 }
+void CntrIUAcomodacao::libera()
+{
+	if(cntrILNAcomodacao != NULL)
+	{
+		cntrILNAcomodacao->libera();	
+		delete cntrILNAcomodacao;
+		cntrILNAcomodacao = NULL;
+	}
+}
+void inline CntrIUAcomodacao::setCntrILNAcomodacao(ILNAcomodacao *cntrILNAcomodacao)
+{
+	this->cntrILNAcomodacao = cntrILNAcomodacao;
+}
 
 
 
@@ -261,12 +358,9 @@ void CntrIUAcomodacao::verifica_consistencia() throw (consistencia_error)
 
 CntrIUReserva::CntrIUReserva()
 {
-	cntrILNReserva = NULL;	
+	cntrILNReserva = NULL;
 }
-void inline CntrIUReserva::setCntrILNReserva(ILNReserva *cntrILNReserva)
-{
-	this->cntrILNReserva = cntrILNReserva;
-}
+CntrIUReserva::~CntrIUReserva(){}
 void CntrIUReserva::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNReserva == NULL)
@@ -277,6 +371,19 @@ void CntrIUReserva::verifica_consistencia() throw (consistencia_error)
 		cntrILNReserva->verifica_consistencia();
 	}
 }
+void CntrIUReserva::libera()
+{
+	if(cntrILNReserva != NULL)
+	{
+		cntrILNReserva->libera();
+		delete cntrILNReserva;
+		cntrILNReserva = NULL;
+	}
+}
+void inline CntrIUReserva::setCntrILNReserva(ILNReserva *cntrILNReserva)
+{
+	this->cntrILNReserva = cntrILNReserva;
+}
 
 
 
@@ -284,6 +391,16 @@ void CntrIUReserva::verifica_consistencia() throw (consistencia_error)
 CntrIUCadastroAcomodacao::CntrIUCadastroAcomodacao()
 {
 	cntrILNCadastroAcomodacao = NULL;	
+}
+CntrIUCadastroAcomodacao::~CntrIUCadastroAcomodacao(){}
+void CntrIUCadastroAcomodacao::libera()
+{
+	if(cntrILNCadastroAcomodacao != NULL)
+	{
+		cntrILNCadastroAcomodacao->libera();
+		delete cntrILNCadastroAcomodacao;
+		cntrILNCadastroAcomodacao = NULL;
+	}
 }
 void inline CntrIUCadastroAcomodacao::setCntrILNCadastroAcomodacao(ILNCadastroAcomodacao *cntrILNCadastroAcomodacao)
 {
@@ -301,6 +418,7 @@ void CntrIUCadastroAcomodacao::verifica_consistencia() throw (consistencia_error
 }
 
 
+
 CntrIUDados::CntrIUDados()
 {
 	cntrIUCartao = NULL;
@@ -309,26 +427,7 @@ CntrIUDados::CntrIUDados()
     cntrIUAlterarNome = NULL;
     cntrIUDeletarConta = NULL;
 }
-void inline CntrIUDados::setCntrIUCartao(IUCartao *cntrIUCartao)
-{
-	this->cntrIUCartao = cntrIUCartao;
-}
-void inline CntrIUDados::setCntrIUContaCorrente(IUContaCorrente *cntrIUContaCorrente)
-{
-	this->cntrIUContaCorrente = cntrIUContaCorrente;
-}
-void inline CntrIUDados::setCntrIUAlterarSenha(IUAlterarSenha *cntrIUAlterarSenha)
-{
-	this->cntrIUAlterarSenha = cntrIUAlterarSenha;
-}
-void inline CntrIUDados::setCntrIUAlterarNome(IUAlterarNome *cntrIUAlterarNome)
-{
-	this->cntrIUAlterarNome = cntrIUAlterarNome;
-}
-void inline CntrIUDados::setCntrIUDeletarConta(IUDeletarConta *cntrIUDeletarConta)
-{
-	this->cntrIUDeletarConta = cntrIUDeletarConta;
-}
+CntrIUDados::~CntrIUDados(){}
 void CntrIUDados::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrIUCartao == NULL)
@@ -367,6 +466,59 @@ void CntrIUDados::verifica_consistencia() throw (consistencia_error)
 		cntrIUDeletarConta->verifica_consistencia();
 	}
 }
+void CntrIUDados::libera()
+{
+	if(cntrIUCartao != NULL)
+	{
+		cntrIUCartao->libera();
+		delete cntrIUCartao; 
+		cntrIUCartao = NULL;
+	}
+	if(cntrIUContaCorrente != NULL)
+	{
+		cntrIUContaCorrente->libera();
+	    delete cntrIUContaCorrente;
+	    cntrIUContaCorrente = NULL;
+	}
+	if(cntrIUAlterarSenha != NULL)
+	{
+	    cntrIUAlterarSenha->libera();
+	    delete cntrIUAlterarSenha;
+	    cntrIUAlterarSenha = NULL;
+	}
+	if(cntrIUAlterarNome != NULL)
+	{
+	    cntrIUAlterarNome->libera();
+	    delete cntrIUAlterarNome;
+	    cntrIUAlterarNome = NULL;
+	}
+	if(cntrIUDeletarConta != NULL)
+	{
+	    cntrIUDeletarConta->libera();
+	    delete cntrIUDeletarConta;
+	    cntrIUDeletarConta = NULL;
+	}
+}
+void inline CntrIUDados::setCntrIUCartao(IUCartao *cntrIUCartao)
+{
+	this->cntrIUCartao = cntrIUCartao;
+}
+void inline CntrIUDados::setCntrIUContaCorrente(IUContaCorrente *cntrIUContaCorrente)
+{
+	this->cntrIUContaCorrente = cntrIUContaCorrente;
+}
+void inline CntrIUDados::setCntrIUAlterarSenha(IUAlterarSenha *cntrIUAlterarSenha)
+{
+	this->cntrIUAlterarSenha = cntrIUAlterarSenha;
+}
+void inline CntrIUDados::setCntrIUAlterarNome(IUAlterarNome *cntrIUAlterarNome)
+{
+	this->cntrIUAlterarNome = cntrIUAlterarNome;
+}
+void inline CntrIUDados::setCntrIUDeletarConta(IUDeletarConta *cntrIUDeletarConta)
+{
+	this->cntrIUDeletarConta = cntrIUDeletarConta;
+}
 
 
 
@@ -377,10 +529,7 @@ CntrIUCartao::CntrIUCartao()
 {
 	cntrILNCartao = NULL;	
 }
-void inline CntrIUCartao::setCntrILNCartao(ILNCartao *cntrILNCartao)
-{
-	this->cntrILNCartao = cntrILNCartao;
-}
+CntrIUCartao::~CntrIUCartao(){}
 void CntrIUCartao::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNCartao == NULL)
@@ -388,15 +537,29 @@ void CntrIUCartao::verifica_consistencia() throw (consistencia_error)
 	else
 		cntrILNCartao->verifica_consistencia();
 }
+void CntrIUCartao::libera()
+{
+	if(cntrILNCartao != NULL)
+	{
+		cntrILNCartao->libera();	
+		delete cntrILNCartao;
+		cntrILNCartao = NULL;
+	}
+}
+void inline CntrIUCartao::setCntrILNCartao(ILNCartao *cntrILNCartao)
+{
+	this->cntrILNCartao = cntrILNCartao;
+}
+
+
+
+
 
 CntrIUContaCorrente::CntrIUContaCorrente()
 {
 	cntrILNContaCorrente = NULL;	
 }
-void inline CntrIUContaCorrente::setCntrILNContaCorrente(ILNContaCorrente *cntrILNContaCorrente)
-{
-	this->cntrILNContaCorrente = cntrILNContaCorrente;
-}
+CntrIUContaCorrente::~CntrIUContaCorrente(){}
 void CntrIUContaCorrente::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNContaCorrente == NULL)
@@ -406,6 +569,19 @@ void CntrIUContaCorrente::verifica_consistencia() throw (consistencia_error)
 		std::cout << green("IUContaCorrente->ILNContaCorrente") << std::endl;
 		cntrILNContaCorrente->verifica_consistencia();
 	}
+}
+void CntrIUContaCorrente::libera()
+{
+	if(cntrILNContaCorrente != NULL)
+	{
+		cntrILNContaCorrente->libera();	
+		delete cntrILNContaCorrente;
+		cntrILNContaCorrente = NULL;
+	}
+}
+void inline CntrIUContaCorrente::setCntrILNContaCorrente(ILNContaCorrente *cntrILNContaCorrente)
+{
+	this->cntrILNContaCorrente = cntrILNContaCorrente;
 }
 
 
@@ -421,10 +597,7 @@ CntrIUAlterarSenha::CntrIUAlterarSenha()
 {
 	cntrILNAlterarSenha = NULL;	
 }
-void inline CntrIUAlterarSenha::setCntrILNAlterarSenha(ILNAlterarSenha *cntrILNAlterarSenha)
-{
-	this->cntrILNAlterarSenha = cntrILNAlterarSenha;
-}
+CntrIUAlterarSenha::~CntrIUAlterarSenha(){}
 void CntrIUAlterarSenha::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNAlterarSenha == NULL)
@@ -434,6 +607,19 @@ void CntrIUAlterarSenha::verifica_consistencia() throw (consistencia_error)
 		std::cout << green("IUAlterarSenha->ILNAlterarSenha") << std::endl;
 		cntrILNAlterarSenha->verifica_consistencia();
 	}
+}
+void CntrIUAlterarSenha::libera()
+{
+	if(cntrILNAlterarSenha != NULL)
+	{
+		cntrILNAlterarSenha->libera();
+		delete cntrILNAlterarSenha;
+		cntrILNAlterarSenha = NULL;
+	}
+}
+void inline CntrIUAlterarSenha::setCntrILNAlterarSenha(ILNAlterarSenha *cntrILNAlterarSenha)
+{
+	this->cntrILNAlterarSenha = cntrILNAlterarSenha;
 }
 
 
@@ -445,10 +631,7 @@ CntrIUAlterarNome::CntrIUAlterarNome()
 {
 	cntrILNAlterarNome = NULL;	
 }
-void inline CntrIUAlterarNome::setCntrILNAlterarNome(ILNAlterarNome *cntrILNAlterarNome)
-{
-	this->cntrILNAlterarNome = cntrILNAlterarNome;
-}
+CntrIUAlterarNome::~CntrIUAlterarNome(){}
 void CntrIUAlterarNome::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNAlterarNome == NULL)
@@ -459,6 +642,19 @@ void CntrIUAlterarNome::verifica_consistencia() throw (consistencia_error)
 		cntrILNAlterarNome->verifica_consistencia();
 	}
 }
+void CntrIUAlterarNome::libera()
+{
+	if(cntrILNAlterarNome != NULL)
+	{
+		cntrILNAlterarNome->libera();
+		delete cntrILNAlterarNome;
+		cntrILNAlterarNome = NULL;
+	}
+}
+void inline CntrIUAlterarNome::setCntrILNAlterarNome(ILNAlterarNome *cntrILNAlterarNome)
+{
+	this->cntrILNAlterarNome = cntrILNAlterarNome;
+}
 
 
 
@@ -467,10 +663,7 @@ CntrIUDeletarConta::CntrIUDeletarConta()
 {
 	cntrILNDeletarConta = NULL;	
 }
-void inline CntrIUDeletarConta::setCntrILNDeletarConta(ILNDeletarConta *cntrILNDeletarConta)
-{
-	this->cntrILNDeletarConta = cntrILNDeletarConta;
-}
+CntrIUDeletarConta::~CntrIUDeletarConta(){}
 void CntrIUDeletarConta::verifica_consistencia() throw (consistencia_error)
 {
 	if(cntrILNDeletarConta == NULL)
@@ -480,4 +673,17 @@ void CntrIUDeletarConta::verifica_consistencia() throw (consistencia_error)
 		std::cout << green("IUAlterarNome->ILNAlterarNome") << std::endl;
 		cntrILNDeletarConta->verifica_consistencia();
 	}
+}
+void CntrIUDeletarConta::libera()
+{
+	if(cntrILNDeletarConta != NULL)
+	{
+		cntrILNDeletarConta->libera();
+		delete cntrILNDeletarConta;
+		cntrILNDeletarConta = NULL;	
+	}
+}
+void inline CntrIUDeletarConta::setCntrILNDeletarConta(ILNDeletarConta *cntrILNDeletarConta)
+{
+	this->cntrILNDeletarConta = cntrILNDeletarConta;
 }

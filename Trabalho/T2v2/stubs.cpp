@@ -2,46 +2,27 @@
 #include "dominios.hpp"
 
 
-void StubILNCadastro::verifica_consistencia() throw (consistencia_error)
-{
+void StubILNCadastro::verifica_consistencia() throw (consistencia_error){}
+void StubILNCadastro::libera(){}
+void StubILNAutenticacao::verifica_consistencia() throw (consistencia_error){}
+void StubILNAutenticacao::libera(){}
+void StubILNAcomodacao::verifica_consistencia() throw (consistencia_error){}
+void StubILNAcomodacao::libera(){}
+void StubILNReserva::verifica_consistencia() throw (consistencia_error){}
+void StubILNReserva::libera(){}
+void StubILNCadastroAcomodacao::verifica_consistencia() throw (consistencia_error){}
+void StubILNCadastroAcomodacao::libera(){}
+void StubILNCartao::verifica_consistencia() throw (consistencia_error){}
+void StubILNCartao::libera(){}
+void StubILNContaCorrente::verifica_consistencia() throw (consistencia_error){}
+void StubILNContaCorrente::libera(){}
+void StubILNAlterarSenha::verifica_consistencia() throw (consistencia_error){}
+void StubILNAlterarSenha::libera(){}
+void StubILNAlterarNome::verifica_consistencia() throw (consistencia_error){}
+void StubILNAlterarNome::libera(){}
+void StubILNDeletarConta::verifica_consistencia() throw (consistencia_error){}
+void StubILNDeletarConta::libera(){}
 
-}
-void StubILNAutenticacao::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNAcomodacao::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNReserva::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNCadastroAcomodacao::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNCartao::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNContaCorrente::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNAlterarSenha::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNAlterarNome::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
-void StubILNDeletarConta::verifica_consistencia() throw (consistencia_error)
-{
-    
-}
 
 
 

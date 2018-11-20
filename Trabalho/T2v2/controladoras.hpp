@@ -6,8 +6,10 @@
 #include "entidades.hpp"
 #include "resultados.hpp"
 
+
 #include <stdexcept>
 #include <iostream>
+#include <stdlib.h>
 
 
 // Declaração de classe controladora de interação para o serviço de autenticação.
@@ -18,18 +20,26 @@ class CntrIUInicializacao: public IUInicializacao {
 private:
 
 	IUCadastro *cntrIUCadastro;
-    IUAutenticacao *cntrIUAutenticacao;
+	IUAutenticacao *cntrIUAutenticacao;
 	IUAcomodacao *cntrIUAcomodacao;
+
+	const static char B_AUTENTICAR = '1';
+	const static char B_CADASTRAR = '2';
+	const static char B_ACOMODACAO = '3';
+	const static char B_SAIR = '0';
 
 public:
 
     CntrIUInicializacao();
+    ~CntrIUInicializacao();
     void verifica_consistencia() throw (consistencia_error);
+    void libera();
 
     void setCntrIUCadastro(IUCadastro*);
     void setCntrIUAutenticacao(IUAutenticacao*);
     void setCntrIUAcomodacao(IUAcomodacao*);
 
+    void inicio();
     void apresentarOpcoes();
 };
 
@@ -44,8 +54,11 @@ private:
 	// const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
 	CntrIUCadastro();
+    ~CntrIUCadastro();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+    
     void setCntrILNCadastro(ILNCadastro*);
     void setCntrIULogado(IULogado *);
 };
@@ -56,10 +69,15 @@ private:
     ILNAutenticacao *cntrILNAutenticacao;
     IULogado *cntrIULogado;
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUAutenticacao();
+    ~CntrIUAutenticacao();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+    
     void setCntrILNAutenticacao(ILNAutenticacao*);
     void setCntrIULogado(IULogado *);
+
+    void autenticar();
 };
 
 class CntrIULogado:public IULogado{
@@ -69,8 +87,11 @@ private:
     IUCadastroAcomodacao *cntrIUCadastroAcomodacao;
     IUDados *cntrIUDados;
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIULogado();
+    ~CntrIULogado();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrIUAcomodacao(IUAcomodacao *);
     void setCntrIUReserva(IUReserva *);
     void setCntrIUCadastroAcomodacao(IUCadastroAcomodacao *);
@@ -84,8 +105,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUAcomodacao();
+    ~CntrIUAcomodacao();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNAcomodacao(ILNAcomodacao *);
     
 };
@@ -97,8 +121,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUReserva();
+    ~CntrIUReserva();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNReserva(ILNReserva *);    
 };
 
@@ -110,8 +137,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUCadastroAcomodacao();
+    ~CntrIUCadastroAcomodacao();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNCadastroAcomodacao(ILNCadastroAcomodacao *);    
 };
 
@@ -124,8 +154,11 @@ private:
     IUAlterarNome *cntrIUAlterarNome;
     IUDeletarConta *cntrIUDeletarConta;
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUDados();
+    ~CntrIUDados();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrIUCartao(IUCartao *);
     void setCntrIUContaCorrente(IUContaCorrente *);
     void setCntrIUAlterarSenha(IUAlterarSenha *);
@@ -141,8 +174,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUCartao();
+    ~CntrIUCartao();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNCartao(ILNCartao *);    
 };
 
@@ -156,8 +192,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUContaCorrente();
+    ~CntrIUContaCorrente();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNContaCorrente(ILNContaCorrente *);    
 };
 
@@ -170,8 +209,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUAlterarSenha();
+    ~CntrIUAlterarSenha();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNAlterarSenha(ILNAlterarSenha *);    
 };
 
@@ -182,8 +224,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUAlterarNome();
+    ~CntrIUAlterarNome();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNAlterarNome(ILNAlterarNome *);    
 };
 
@@ -195,8 +240,11 @@ private:
     // const static int LIMITE_TENTATIVAS = 4; 
 
 public:
-    void verifica_consistencia() throw (consistencia_error);
     CntrIUDeletarConta();
+    ~CntrIUDeletarConta();
+    void verifica_consistencia() throw (consistencia_error);
+    void libera();
+
     void setCntrILNDeletarConta(ILNDeletarConta *);    
 };
 
