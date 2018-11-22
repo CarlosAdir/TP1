@@ -27,29 +27,21 @@ void Usuario::setSenha(const Senha &senha)
 	this->senha = senha;
 }
 
-Nome inline Usuario::getNome() const
+Nome Usuario::getNome() const
 {
 	return this->nome;
 }
 
-Identificador inline Usuario::getIdentificador() const
+Identificador Usuario::getIdentificador() const
 {
 	return this->id;
 }
 
-Senha inline Usuario::getSenha() const
+Senha Usuario::getSenha() const
 {
 	return this->senha;
 }
 
-// void Usuario::validar(std::string agencia) throw (std::invalid_argument)
-// {
-
-// }
-// void Usuario::set() throw (std::invalid_argument)
-// {
-
-// }
 
 
 /**
@@ -64,6 +56,11 @@ Acomodacao::Acomodacao()
 {}
 Acomodacao::~Acomodacao()
 {}
+void Acomodacao::validar(Data inicio, Data termino) throw (std::invalid_argument)
+{
+	if(termino < inicio)
+		throw std::invalid_argument("Datas invalidas! O termino é antes do comeco!");
+}
 void Acomodacao::setIdentificador(const Identificador &id)
 {
 	this->id = id;
@@ -76,13 +73,11 @@ void Acomodacao::setCapacidadeAcomodacao(const CapacidadeAcomodacao &capacidade)
 {
 	this->capacidade = capacidade;
 }
-void Acomodacao::setDataInicio(const Data &data_inicio)
+void Acomodacao::setDatas(const Data &inicio, const Data &termino)
 {
-	this->data_inicio = data_inicio;
-}
-void Acomodacao::setDataTermino(const Data &data_termino)
-{
-	this->data_termino = data_termino;
+	validar(inicio, termino);
+	this->data_inicio = inicio;
+	this->data_termino = termino;
 }
 void Acomodacao::setCidade(const Nome &cidade)
 {
@@ -96,35 +91,35 @@ void Acomodacao::setDiaria(const Diaria &diaria)
 {
 	this->diaria = diaria;
 }
-Identificador inline Acomodacao::getIdentificador() const
+Identificador  Acomodacao::getIdentificador() const
 {
 	return this->id;
 }
-TipoAcomodacao inline Acomodacao::getTipoAcomodacao() const
+TipoAcomodacao  Acomodacao::getTipoAcomodacao() const
 {
 	return this->tipo;
 }
-CapacidadeAcomodacao inline Acomodacao::getCapacidadeAcomodacao() const
+CapacidadeAcomodacao  Acomodacao::getCapacidadeAcomodacao() const
 {
 	return this->capacidade;
 }
-Data inline Acomodacao::getDataInicio() const
+Data  Acomodacao::getDataInicio() const
 {
 	return this->data_termino;
 }
-Data inline Acomodacao::getDataTermino() const
+Data  Acomodacao::getDataTermino() const
 {
 	return this->data_termino;
 }
-Nome inline Acomodacao::getCidade() const
+Nome  Acomodacao::getCidade() const
 {
 	return this->cidade;
 }
-Estado inline Acomodacao::getEstado() const
+Estado  Acomodacao::getEstado() const
 {
 	return this->estado;
 }
-Diaria inline Acomodacao::getDiaria() const
+Diaria  Acomodacao::getDiaria() const
 {
 	return this->diaria;
 }
@@ -151,11 +146,11 @@ void CartaoCredito::setValidade(const DataValidade &data_validade)
 {
 	this->data_validade = data_validade;
 }
-NumeroCartaoCredito inline CartaoCredito::getNumero() const
+NumeroCartaoCredito  CartaoCredito::getNumero() const
 {
 	return this->numero;
 }
-DataValidade inline CartaoCredito::getValidade() const
+DataValidade  CartaoCredito::getValidade() const
 {
 	return this->data_validade;
 }
@@ -185,15 +180,15 @@ void ContaCorrente::setBanco(const Banco &banco)
 {
 	this->banco = banco;
 }
-NumeroContaCorrente inline ContaCorrente::getContaCorrente() const
+NumeroContaCorrente  ContaCorrente::getContaCorrente() const
 {
 	return this->numero;
 }
-Agencia inline ContaCorrente::getAgencia() const
+Agencia  ContaCorrente::getAgencia() const
 {
 	return this->agencia;
 }
-Banco inline ContaCorrente::getBanco() const
+Banco  ContaCorrente::getBanco() const
 {
 	return this->banco;
 }

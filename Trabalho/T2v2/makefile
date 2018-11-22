@@ -2,8 +2,10 @@ all: programa clean executar
 
 c: programa clean # compilar
 
+x: executar
+
 programa: main.o
-	g++ main.o dominios.o entidades.o controladoras.o stubs.o testes.o -o executavel
+	g++ main.o dominios.o entidades.o controladoras.o stubs.o testes.o input_data.o -o executavel
 
 main.o: testes.o controladoras.o stubs.o
 	g++ -c -Wall -ansi main.cpp
@@ -17,11 +19,14 @@ entidades.o: dominios.o
 testes.o: entidades.o
 	g++ -c -Wall -ansi testes.cpp
 
-controladoras.o: dominios.o
+controladoras.o: dominios.o input_data.o
 	g++ -c -Wall -ansi controladoras.cpp
 
-stubs.o: dominios.o entidades.o
+stubs.o: dominios.o entidades.o input_data.o
 	g++ -c -Wall -ansi stubs.cpp
+
+input_data.o:
+	g++ -c -Wall -ansi input_data.cpp
 
 clean:
 	if [ "`ls -1 *.o 2>/dev/null | wc -l`" != 0 ]; then rm *.o; fi 

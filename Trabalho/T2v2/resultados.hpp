@@ -46,4 +46,40 @@ class ResultadoLogado:public Resultado
 
 };
 
+
+class ResultadoAdicionarAcomodacao:public Resultado{};
+class ResultadoRemoverAcomodacao:public Resultado{};
+class ResultadoAdicionarReserva:public Resultado{};
+class ResultadoRemoverReserva:public Resultado{};
+
+class ResultadoContaCorrente:public Resultado
+{
+
+
+};
+
+class ResultadoCartaoCredito:public Resultado
+{
+
+
+};
+
+class ResultadoAlterarSenha:public Resultado
+{
+
+
+};
+
+class ResultadoAlterarNome:public Resultado
+{
+
+
+};
+
+class ResultadoDeletarConta:public Resultado
+{
+
+
+};
+
 #endif

@@ -35,13 +35,13 @@ private:
 	Nome cidade;
 	Estado estado;
 	Diaria diaria;
+	void validar(Data inicio, Data termino) throw (std::invalid_argument);
 public:
 	// Sets
 	void setIdentificador(const Identificador&);
 	void setTipoAcomodacao(const TipoAcomodacao&);
 	void setCapacidadeAcomodacao(const CapacidadeAcomodacao&);
-	void setDataInicio(const Data&);
-	void setDataTermino(const Data&);
+	void setDatas(const Data &inicio, const Data &termino);
 	void setCidade(const Nome&);
 	void setEstado(const Estado&);
 	void setDiaria(const Diaria&);

@@ -15,10 +15,10 @@ void Agencia::validar(std::string agencia) throw (std::invalid_argument)
 {
 	int i, n = agencia.size();
 	if(n != 5)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Agencia invalida - Nao ha 5 algarismos");
 	for(i = 0; i < n; i++)
 		if(!isdigit(agencia[i]))
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Agencia invalida - Deve-se ter apenas algarismos");
 }
 void Agencia::set(std::string agencia) throw (std::invalid_argument)
 {
@@ -50,6 +50,18 @@ std::string Agencia::get()
 	*/
 	return agencia;
 }
+std::ostream& operator<<(std::ostream& os, Agencia& a)  
+{  
+    os << a.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Agencia& a)  
+{  
+	std::string valor_agencia;
+	is >> valor_agencia;
+	a.set(valor_agencia);
+    return is;  
+}
 
 
 
@@ -70,10 +82,10 @@ void Banco::validar(std::string banco) throw (std::invalid_argument)
 {
 	int i, n = banco.size();
 	if(n != 3)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Banco invalido - Nao ha 3 algarismos");
 	for(i = 0; i < n; i++)
 		if(!isdigit(banco[i]))
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Banco invalido - Deve-se ter apenas algarismos");
 }
 void Banco::set(std::string banco) throw (std::invalid_argument)
 {
@@ -105,6 +117,18 @@ std::string Banco::get()
 	*/
 	return banco;
 }
+std::ostream& operator<<(std::ostream& os, Banco& b)  
+{  
+    os << b.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Banco& b)  
+{  
+	std::string valor_banco;
+	is >> valor_banco;
+	b.set(valor_banco);
+    return is;  
+}
 
 
 /**
@@ -121,7 +145,7 @@ CapacidadeAcomodacao::CapacidadeAcomodacao()
 void CapacidadeAcomodacao::validar(int valor) throw (std::invalid_argument)
 {
 	if(valor > 9 || valor < 1)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Capacidade invalida - Nao esta entre 1 e 9");
 }
 void CapacidadeAcomodacao::set(int valor) throw (std::invalid_argument)
 {
@@ -152,6 +176,18 @@ int CapacidadeAcomodacao::get()
 	*/
 	return valor;
 }
+std::ostream& operator<<(std::ostream& os, CapacidadeAcomodacao& c)  
+{  
+    os << c.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, CapacidadeAcomodacao& c)  
+{  
+	int valor_capacidade;
+	is >> valor_capacidade;
+	c.set(valor_capacidade);
+    return is;  
+}
 
 
 
@@ -172,7 +208,7 @@ Diaria::Diaria()
 void Diaria::validar(double valor) throw (std::invalid_argument)
 {
 	if(valor < 1 || valor > 1e+4)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Diaria invalida - Deve-se ter valor entre 1 e 1000");
 }
 void Diaria::set(double valor) throw (std::invalid_argument)
 {
@@ -203,6 +239,19 @@ double Diaria::get()
 	*/
 	return valor;
 }
+std::ostream& operator<<(std::ostream& os, Diaria& d)  
+{  
+    os << d.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Diaria& d)  
+{  
+	double valor;
+	is >> valor;
+	d.set(valor);
+    return is;  
+}
+
 
 
 
@@ -219,9 +268,9 @@ Data::Data()
 void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argument)
 {
 	if(dia < 1 || dia > 31)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Dia invalido - Deve estar entre 1 e 31");
 	if(ano < 2000 || ano >= 2100)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Ano invalido - Deve estar entre 2000 e 2100");
 	if(mes == "jan")
 	{
 		// Mes ja tem 31 dias no maximo
@@ -231,12 +280,12 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 		if(ano%4 == 0)
 		{
 			if(dia > 29)
-				throw std::invalid_argument("Argumento invalido.");
+				throw std::invalid_argument("Dia invalido - Fevereiro tem apenas 29 dias nesse ano");
 		}
 		else
 		{
 			if(dia > 28)
-				throw std::invalid_argument("Argumento invalido.");
+				throw std::invalid_argument("Dia invalido - Fevereiro tem apenas 28 dias nesse ano");
 		}
 	}
 	else if(mes == "mar")
@@ -246,7 +295,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "abr")
 	{
 		if(dia > 30)
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Dia invalido - Abril so tem 30 dias");
 	}
 	else if(mes == "mai")
 	{
@@ -255,7 +304,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "jun")
 	{
 		if(dia > 30)
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Dia invalido - Junho so tem 30 dias");
 	}
 	else if(mes == "jul")
 	{
@@ -268,7 +317,7 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "set")
 	{
 		if(dia > 30)
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Dia invalido - Setembro so tem 30 dias");
 	}
 	else if(mes == "out")
 	{
@@ -277,14 +326,14 @@ void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argume
 	else if(mes == "nov")
 	{
 		if(dia > 30)
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Dia invalido - Novembro so tem 30 dias");
 	}
 	else if(mes == "dez")
 	{
 		// Mes ja tem 31 dias no maximo
 	}
 	else
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Mes invalido");
 }
 void Data::set(int dia, std::string mes, int ano) throw (std::invalid_argument)
 {
@@ -335,8 +384,67 @@ int Data::getAno()
 	*/
 	return ano;
 }
-
-
+int Data::mes_number(const std::string &o_mes) throw (std::invalid_argument)
+{
+	if(o_mes == "jan")
+		return 1;
+	if(o_mes == "fev")
+		return 2;
+	if(o_mes == "mar")
+		return 3;
+	if(o_mes == "abr")
+		return 4;
+	if(o_mes == "mai")
+		return 5;
+	if(o_mes == "jun")
+		return 6;
+	if(o_mes == "jul")
+		return 7;
+	if(o_mes == "ago")
+		return 8;
+	if(o_mes == "set")
+		return 9;
+	if(o_mes == "out")
+		return 10;
+	if(o_mes == "nov")
+		return 11;
+	if(o_mes == "dez")
+		return 12;
+	throw std::invalid_argument("O mes passado nao esta dentre os possiveis");
+	return 0;
+}
+bool Data::operator<(Data &dt)
+{
+	int dia1, dia2;
+	int mes1, mes2;
+	int ano1, ano2;
+	dia1 = dt.getDia();
+	dia2 = this->dia;
+	mes1 = mes_number(dt.getMes());
+	mes2 = mes_number(this->mes);
+	ano1 = dt.getAno();
+	ano2 = this->getAno();
+	if(ano1 < ano2)
+		return false;
+	if(mes1 < mes2)
+		return false;
+	if(dia1 < dia2)
+		return false;
+	return true;
+}
+std::ostream& operator<<(std::ostream& os, Data& t)  
+{  
+    os << t.getDia() << " " << t.getMes() << " " << t.getAno();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Data& t)  
+{  
+	int dia, ano;
+	std::string mes;
+	is >> dia >> mes >> ano;
+	t.set(dia, mes, ano);
+    return is;  
+}
 
 
 
@@ -353,9 +461,9 @@ DataValidade::DataValidade()
 void DataValidade::validar(int mes, int ano) throw (std::invalid_argument)
 {
 	if(mes < 1 || mes > 12)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Mes invalido.");
 	if(ano < 0 || ano > 99)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Ano invalido.");
 
 }
 void DataValidade::set(int mes, int ano) throw (std::invalid_argument)
@@ -397,6 +505,18 @@ int DataValidade::getAno()
 	*/
 	return ano;
 }
+std::ostream& operator<<(std::ostream& os, DataValidade& d)  
+{  
+    os << d.getMes() << "/" << d.getAno();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, DataValidade& d)  
+{  
+	int mes, ano;
+	is >> mes >> ano;
+	d.set(mes, ano);
+    return is;  
+}
 
 
 
@@ -420,7 +540,7 @@ void Estado::validar(std::string estado) throw (std::invalid_argument)
 	else if(estado == "RJ" || estado == "RN" || estado == "RS" || estado == "RO" || estado == "RR"){}
 	else if(estado == "SC" || estado == "SP" || estado == "SE" || estado == "TO"){}
 	else
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Estado invalido.");
 }
 void Estado::set(std::string estado) throw (std::invalid_argument)
 {
@@ -451,6 +571,18 @@ std::string Estado::get()
 	*/
 	return estado;
 }
+std::ostream& operator<<(std::ostream& os, Estado& e)  
+{  
+    os << e.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Estado& e)  
+{  
+	std::string estado;
+	is >> estado;
+	e.set(estado);
+    return is;  
+}
 
 
 
@@ -471,10 +603,10 @@ void Identificador::validar(std::string identificador) throw (std::invalid_argum
 {
 	int i, n = identificador.size();
 	if(n != 5)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Identificador invalido - Nao possui 5 caracteres.");
 	for(i = 0; i < n; i++)
 		if(!islower(identificador[i]))
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Identificador invalido - Nao esta composto apenas de letras minusculas.");
 }
 void Identificador::set(std::string identificador) throw (std::invalid_argument)
 {
@@ -505,6 +637,18 @@ std::string Identificador::get() const
 	*/
 	return identificador;
 }
+std::ostream& operator<<(std::ostream& os, Identificador& id)  
+{  
+    os << id.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Identificador& id)  
+{  
+	std::string iden;
+	is >> iden;
+	id.set(iden);
+    return is;  
+}
 
 
 
@@ -526,14 +670,14 @@ void Nome::validar(std::string nome) throw (std::invalid_argument)
 	for(i = 0; i < n-1; i++)
 	{
 		if(nome[i] == nome[i+1] && nome[i] == ' ')
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Nome invalido.");
 		if(nome[i+1] == '.' && !isalpha(nome[i]))
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Nome invalido.");
 		if(!isalpha(nome[i]) && nome[i] != ' ' && nome[i] != '.')
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Nome invalido.");
 	}
 	if(!isalpha(nome[i]) && nome[i] != ' ' && nome[i] != '.')
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Nome invalido.");
 }
 void Nome::set(std::string nome) throw (std::invalid_argument)
 {
@@ -565,6 +709,18 @@ std::string Nome::get()
 	*/
 	return nome;
 }
+std::ostream& operator<<(std::ostream& os, Nome& nome)  
+{  
+    os << nome.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Nome& nome)  
+{  
+	std::string entrada;
+	std::getline(is, entrada);
+	nome.set(entrada);
+    return is;  
+}
 
 
 
@@ -584,10 +740,10 @@ void NumeroCartaoCredito::validar(std::string numerocartaocredito) throw (std::i
 {
 	int i, n = numerocartaocredito.size();
 	if(n != 16)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Numero de cartao invalido - Nao ha 16 digitos.");
 	for(i = 0; i < n; i++)
 		if(!isdigit(numerocartaocredito[i]))
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Numero de cartao invalido - Deve-se ter apenas digitos");
 
 	int nSum       = 0;
     int nParity    = (n-1) % 2;
@@ -600,7 +756,7 @@ void NumeroCartaoCredito::validar(std::string numerocartaocredito) throw (std::i
       nSum += (nDigit/10 + nDigit%10);
     }
     if(nSum % 10 != 0)
-    	throw std::invalid_argument("Argumento invalido.");
+    	throw std::invalid_argument("Numero de cartao invalido - Provavelmente falha de digitacao.");
 }
 void NumeroCartaoCredito::set(std::string numerocartaocredito) throw (std::invalid_argument)
 {
@@ -631,6 +787,18 @@ std::string NumeroCartaoCredito::get()
 	*/
 	return numerocartaocredito;
 }
+std::ostream& operator<<(std::ostream& os, NumeroCartaoCredito& numero)  
+{  
+    os << numero.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, NumeroCartaoCredito& numero)  
+{  
+	std::string entrada;
+	std::getline(is, entrada);
+	numero.set(entrada);
+    return is;  
+}
 
 
 
@@ -652,10 +820,10 @@ void NumeroContaCorrente::validar(std::string numerocontacorrente) throw (std::i
 {
 	int i, n = numerocontacorrente.size();
 	if(n != 6)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Numero de Conta Corrente invalido - Nao possui 6 digitos");
 	for(i = 0; i < n; i++)
 		if(!isdigit(numerocontacorrente[i]))
-			throw std::invalid_argument("Argumento invalido.");
+			throw std::invalid_argument("Numero de Conta Corrente invalido - Deve-se ter apenas digitos");
 }
 void NumeroContaCorrente::set(std::string numerocontacorrente) throw (std::invalid_argument)
 {
@@ -687,6 +855,18 @@ std::string NumeroContaCorrente::get()
 	*/
 	return numerocontacorrente;
 }
+std::ostream& operator<<(std::ostream& os, NumeroContaCorrente& numero)  
+{  
+    os << numero.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, NumeroContaCorrente& numero)  
+{  
+	std::string entrada;
+	std::getline(is, entrada);
+	numero.set(entrada);
+    return is;  
+}
 
 
 
@@ -706,7 +886,7 @@ void Senha::validar(std::string senha) throw (std::invalid_argument)
 	bool upper = false, lower = false, digit = false, simbol = false;
 	int i, j, n = senha.size();
 	if(n != 8)
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Senha invalida - Deve-se ter 8 caracteres");
 	for(i = 0; i < n; i++)
 	{
 		if(isupper(senha[i]))
@@ -718,12 +898,18 @@ void Senha::validar(std::string senha) throw (std::invalid_argument)
 		else if(senha[i] == '!' || senha[i] == '#' || senha[i] == '$' || senha[i] == '%' || senha[i] == '&')
 			simbol = true;
 	}
-	if(!(upper && lower && digit && simbol))
-		throw std::invalid_argument("Argumento invalido.");
+	if(!upper)
+		throw std::invalid_argument("Senha invalida - Nao ha nenhuma letra maiuscula");
+	if(!lower)
+		throw std::invalid_argument("Senha invalida - Nao ha nenhuma letra minuscula");
+	if(!digit)
+		throw std::invalid_argument("Senha invalida - Nao ha nenhum numero");
+	if(!simbol)
+		throw std::invalid_argument("Senha invalida - Nao ha nenhum simbolo");
 	for(i = 0; i < n-1; i++)
 		for(j = i+1; j < n; j++)
 			if(senha[i] == senha[j])
-				throw std::invalid_argument("Argumento invalido.");
+				throw std::invalid_argument("Senha invalida - Existe caracter repetido");
 }
 void Senha::set(std::string senha) throw (std::invalid_argument)
 {
@@ -757,7 +943,18 @@ std::string Senha::get() const
 	*/
 	return senha;
 }
-
+std::ostream& operator<<(std::ostream& os, Senha& password)  
+{  
+    os << password.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, Senha& password)  
+{  
+	std::string sen;
+	is >> sen;
+	password.set(sen);
+    return is;  
+}
 
 
 
@@ -778,7 +975,7 @@ TipoAcomodacao::TipoAcomodacao()
 void TipoAcomodacao::validar(std::string tipoacomodacao) throw (std::invalid_argument)
 {
 	if(tipoacomodacao != "Casa" && tipoacomodacao != "Apartamento" && tipoacomodacao != "Flat")
-		throw std::invalid_argument("Argumento invalido.");
+		throw std::invalid_argument("Tipo de Acomodacao Invalido");
 }
 void TipoAcomodacao::set(std::string tipoacomodacao) throw (std::invalid_argument)
 {

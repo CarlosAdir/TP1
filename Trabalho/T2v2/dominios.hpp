@@ -17,6 +17,8 @@ public:
 	std::string get(); /**< Returns Agencia's string with 5 digits. */
 	// Agencia(std::string);
 	Agencia();
+	friend std::ostream& operator<<(std::ostream& os, Agencia&);
+    friend std::istream& operator>>(std::istream& os, Agencia&);
 };
 
 
@@ -30,6 +32,8 @@ public:
 	std::string get(); /**< Returns Banco's string with 3 digits. */
 	// Banco(std::string);
 	Banco();
+	friend std::ostream& operator<<(std::ostream& os, Banco&);
+    friend std::istream& operator>>(std::istream& os, Banco&);
 };
 
 
@@ -42,6 +46,8 @@ public:
 	void set(int valor) throw (std::invalid_argument); /**< Try to set the accommodation capacity number on the object. */
 	int get(); /**< Returns the capacity value from CapacidadeAcomodacao's object. */
 	CapacidadeAcomodacao();
+	friend std::ostream& operator<<(std::ostream& os, CapacidadeAcomodacao&);
+    friend std::istream& operator>>(std::istream& os, CapacidadeAcomodacao&);
 };
 
 
@@ -55,6 +61,8 @@ public:
 	double get(); /**< Returns the price of a Diaria. */
 	// Diaria( double );
 	Diaria();
+	friend std::ostream& operator<<(std::ostream& os, Diaria&);
+    friend std::istream& operator>>(std::istream& os, Diaria&);
 };
 
 
@@ -64,6 +72,7 @@ private:
 	int dia, ano;
 	std::string mes;
 	void validar(int dia, std::string mes, int ano) throw (std::invalid_argument);
+	int mes_number(const std::string &) throw (std::invalid_argument);
 public:
 	void set(int dia, std::string mes, int ano) throw (std::invalid_argument); /**< Try to set the date on the object */
 	int getDia(); /**< Returns the day stored on Data's object. */
@@ -71,6 +80,9 @@ public:
 	int getAno(); /**< Returns the year stored on Data's object. */
 	// Data(int, std::string, int);
 	Data();
+	bool operator<(Data &d1);
+	friend std::ostream& operator<<(std::ostream& os, Data&);
+    friend std::istream& operator>>(std::istream& os, Data&);
 };
 
 
@@ -85,6 +97,8 @@ public:
 	int getAno(); /**< Returns the year stored on DataValidade's object. */
 	// DataValidade(int, int);
 	DataValidade();
+	friend std::ostream& operator<<(std::ostream& os, DataValidade&);
+    friend std::istream& operator>>(std::istream& os, DataValidade&);
 };
 
 
@@ -98,6 +112,8 @@ public:
 	std::string get(); /**< Returns the state of Brazil stored on Estado's object. */
 	// Estado(std::string);
 	Estado();
+	friend std::ostream& operator<<(std::ostream& os, Estado&);
+    friend std::istream& operator>>(std::istream& os, Estado&);
 };
 
 
@@ -111,6 +127,8 @@ public:
 	std::string get() const; /**< Returns the identificator stored on Identificador's object. */
 	// Identificador(std::string);
 	Identificador();
+	friend std::ostream& operator<<(std::ostream& os, Identificador&);
+    friend std::istream& operator>>(std::istream& os, Identificador&);
 };
 
 
@@ -124,6 +142,8 @@ public:
 	std::string get(); /**< Returns the name stored on Nome's object. */
 	// Nome(std::string);
 	Nome();
+	friend std::ostream& operator<<(std::ostream& os, Nome&);
+    friend std::istream& operator>>(std::istream& os, Nome&);
 };
 
 
@@ -137,6 +157,8 @@ public:
 	std::string get(); /**< Returns the credit card number stored on NumeroCartaoCredito's object. */
 	// NumeroCartaoCredito(std::string);
 	NumeroCartaoCredito();
+	friend std::ostream& operator<<(std::ostream& os, NumeroCartaoCredito&);
+    friend std::istream& operator>>(std::istream& os, NumeroCartaoCredito&);
 };
 
 
@@ -150,6 +172,8 @@ public:
 	std::string get(); /**< Returns the account number stored on NumeroContaCorrente's object. */
 	// NumeroContaCorrente(std::string);
 	NumeroContaCorrente();
+	friend std::ostream& operator<<(std::ostream& os, NumeroContaCorrente&);
+    friend std::istream& operator>>(std::istream& os, NumeroContaCorrente&);
 };
 
 
@@ -163,6 +187,8 @@ public:
 	std::string get() const; /**< Returns the password stored on Senha's object. */
 	// Senha(std::string);
 	Senha();
+	friend std::ostream& operator<<(std::ostream& os, Senha&);
+    friend std::istream& operator>>(std::istream& os, Senha&);
 };
 
 
@@ -176,6 +202,8 @@ public:
 	std::string get(); /**< Returns the accomodation type stored on TipoAcomodacao's object. */
 	// TipoAcomodacao(std::string);
 	TipoAcomodacao();
+	friend std::ostream& operator<<(std::ostream& os, TipoAcomodacao&);
+    friend std::istream& operator>>(std::istream& os, TipoAcomodacao&);
 };
 
 #endif

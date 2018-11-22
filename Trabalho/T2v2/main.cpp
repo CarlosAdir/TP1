@@ -209,7 +209,7 @@ int main()
 	cntrIUInicio = initial_setting();
 	// cntrIUInicio->verifica_consistencia();
 	
-	cntrIUInicio->inicio();
+	cntrIUInicio->menu();
 
 	// cntrIUInicio->libera();
 
