@@ -30,6 +30,7 @@ void TU::print_result(const std::string texto, const bool result)
     std::cout << texto;
     std::cout << (result == false ? "\033[0m" : "\033[0m") << std::endl;
     numerador += 1;
+    //std::cout << "\033[1;31m" << texto << "\033[0m" << std::endl;
 }
 void TU::print_final_result(const bool result)
 {

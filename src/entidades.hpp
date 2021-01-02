@@ -57,6 +57,8 @@ public:
 	// Construct
 	Acomodacao();
 	~Acomodacao();
+	// friend std::ostream& operator<<(std::ostream& os, Acomodacao&);
+ //    friend std::istream& operator>>(std::istream& os, Acomodacao&);
 };
 
 
@@ -75,6 +77,8 @@ public:
 	// Construct
 	CartaoCredito();
 	~CartaoCredito();
+	friend std::ostream& operator<<(std::ostream& os, Acomodacao&);
+    friend std::istream& operator>>(std::istream& os, Acomodacao&);
 };
 
 
@@ -96,6 +100,8 @@ public:
 	// Construct
 	ContaCorrente();
 	~ContaCorrente();
+	friend std::ostream& operator<<(std::ostream& os, ContaCorrente&);
+    friend std::istream& operator>>(std::istream& os, ContaCorrente&);
 };
 
 

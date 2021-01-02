@@ -8,12 +8,6 @@ protected:
     int valor;
 
 public:
-
-    // Declarações de possíveis resultados.
-
-    const static int SUCESSO = 0;
-    const static int FALHA   = 1;
-
     void setValor(int valor){
         this->valor = valor;
     }
@@ -26,12 +20,21 @@ public:
 
 class ResultadoCadastro:public Resultado
 {
+public:
+    const static int EXISTE = 0;
+    const static int ERRO_INESPERADO = 1;
+    const static int CADASTRADO = 2;
 
 };
 
 class ResultadoAutenticacao:public Resultado
 {
-
+private:
+    int valor;
+public:
+    const static int SENHA_VALIDA = 1;
+    const static int SENHA_INVALIDA = 2;
+    const static int NAO_CADASTRADO = 3;
 };
 
 class ResultadoAcomodacao:public Resultado

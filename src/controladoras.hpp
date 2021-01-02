@@ -149,7 +149,7 @@ private:
     const static char B_REMOVER = '2';
     const static char B_VOLTAR = '0';
 
-    void apresentarOpcoes();
+    void apresentarOpcoes(Identificador &);
 
     void adicionar_reserva(Identificador &);
     void remover_reserva(Identificador &);
@@ -179,7 +179,7 @@ private:
     const static char B_REMOVER = '2';
     const static char B_VOLTAR = '0';
 
-    void apresentarOpcoes();
+    void apresentarOpcoes(Identificador &);
 
     void adicionar_acomodacao(Identificador &);
     void remover_acomodacao(Identificador &);
@@ -220,7 +220,7 @@ private:
     const static char B_DELETAR = '5';
     const static char B_VOLTAR = '0';
     
-    void apresentarOpcoes();
+    void apresentarOpcoes(Identificador &);
 public:
     CntrIUDados();
     ~CntrIUDados();

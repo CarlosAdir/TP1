@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
+#include <algorithm>
 
  
 char getch();
@@ -16,5 +18,6 @@ void travar_tela();
 std::string red(std::string);
 std::string green(std::string);
 void limpar_tela();
+std::vector<std::string> split(std::string str, char);
 
 #endif 

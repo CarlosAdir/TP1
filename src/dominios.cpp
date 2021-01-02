@@ -11,6 +11,10 @@
 // {set(agencia);}
 Agencia::Agencia()
 {}
+Agencia::Agencia(std::string agencia)  throw (std::invalid_argument)
+{
+	set(agencia);
+}
 void Agencia::validar(std::string agencia) throw (std::invalid_argument)
 {
 	int i, n = agencia.size();
@@ -41,7 +45,7 @@ void Agencia::set(std::string agencia) throw (std::invalid_argument)
 	validar(agencia);
 	this->agencia = agencia;
 }
-std::string Agencia::get()
+std::string Agencia::get() const
 {
 	/**
 	* Returns the string number from the object.
@@ -50,7 +54,7 @@ std::string Agencia::get()
 	*/
 	return agencia;
 }
-std::ostream& operator<<(std::ostream& os, Agencia& a)  
+std::ostream& operator<<(std::ostream& os, const Agencia& a)  
 {  
     os << a.get();
     return os;  
@@ -78,6 +82,10 @@ std::istream& operator>>(std::istream& is, Agencia& a)
 // {set(banco);}
 Banco::Banco()
 {}
+Banco::Banco(std::string banco) throw (std::invalid_argument)
+{
+	set(banco);
+}
 void Banco::validar(std::string banco) throw (std::invalid_argument)
 {
 	int i, n = banco.size();
@@ -108,7 +116,7 @@ void Banco::set(std::string banco) throw (std::invalid_argument)
 	validar(banco);
 	this->banco = banco;
 }
-std::string Banco::get()
+std::string Banco::get() const
 {
 	/**
 	* Returns the string number from the object.
@@ -117,7 +125,7 @@ std::string Banco::get()
 	*/
 	return banco;
 }
-std::ostream& operator<<(std::ostream& os, Banco& b)  
+std::ostream& operator<<(std::ostream& os, const Banco& b)  
 {  
     os << b.get();
     return os;  
@@ -142,6 +150,10 @@ std::istream& operator>>(std::istream& is, Banco& b)
 // {set(valor)}
 CapacidadeAcomodacao::CapacidadeAcomodacao()
 {}
+CapacidadeAcomodacao::CapacidadeAcomodacao(int valor) throw (std::invalid_argument)
+{
+	set(valor);
+}
 void CapacidadeAcomodacao::validar(int valor) throw (std::invalid_argument)
 {
 	if(valor > 9 || valor < 1)
@@ -168,7 +180,7 @@ void CapacidadeAcomodacao::set(int valor) throw (std::invalid_argument)
 	validar(valor);
 	this->valor = valor;
 }
-int CapacidadeAcomodacao::get()
+int CapacidadeAcomodacao::get() const
 {
 	/**
 	* Returns the accomodation capacity number from the object.
@@ -176,7 +188,7 @@ int CapacidadeAcomodacao::get()
 	*/
 	return valor;
 }
-std::ostream& operator<<(std::ostream& os, CapacidadeAcomodacao& c)  
+std::ostream& operator<<(std::ostream& os, const CapacidadeAcomodacao& c)  
 {  
     os << c.get();
     return os;  
@@ -205,6 +217,10 @@ std::istream& operator>>(std::istream& is, CapacidadeAcomodacao& c)
 */
 Diaria::Diaria()
 {}
+Diaria::Diaria(double valor) throw (std::invalid_argument)
+{
+	set(valor);
+}
 void Diaria::validar(double valor) throw (std::invalid_argument)
 {
 	if(valor < 1 || valor > 1e+4)
@@ -231,7 +247,7 @@ void Diaria::set(double valor) throw (std::invalid_argument)
 	validar(valor);
 	this->valor = valor;
 }
-double Diaria::get()
+double Diaria::get() const
 {
 	/**
 	* Returns the price per day.
@@ -239,7 +255,7 @@ double Diaria::get()
 	*/
 	return valor;
 }
-std::ostream& operator<<(std::ostream& os, Diaria& d)  
+std::ostream& operator<<(std::ostream& os, const Diaria& d)  
 {  
     os << d.get();
     return os;  
@@ -265,6 +281,10 @@ std::istream& operator>>(std::istream& is, Diaria& d)
 */
 Data::Data()
 {}
+Data::Data(int dia, std::string mes, int ano) throw (std::invalid_argument)
+{
+	set(dia, mes, ano);
+}
 void Data::validar(int dia, std::string mes, int ano) throw (std::invalid_argument)
 {
 	if(dia < 1 || dia > 31)
@@ -360,7 +380,7 @@ void Data::set(int dia, std::string mes, int ano) throw (std::invalid_argument)
 	this->mes = mes;
 	this->ano = ano;
 }
-int Data::getDia()
+int Data::getDia() const
 {
 	/**
 	* Returns the day.
@@ -368,7 +388,7 @@ int Data::getDia()
 	*/
 	return dia;
 }
-std::string Data::getMes()
+std::string Data::getMes() const
 {
 	/**
 	* Returns the month.
@@ -376,7 +396,7 @@ std::string Data::getMes()
 	*/
 	return mes;
 }
-int Data::getAno()
+int Data::getAno() const
 {
 	/**
 	* Returns the year.
@@ -432,7 +452,7 @@ bool Data::operator<(Data &dt)
 		return false;
 	return true;
 }
-std::ostream& operator<<(std::ostream& os, Data& t)  
+std::ostream& operator<<(std::ostream& os, const Data& t)  
 {  
     os << t.getDia() << " " << t.getMes() << " " << t.getAno();
     return os;  
@@ -458,6 +478,10 @@ std::istream& operator>>(std::istream& is, Data& t)
 */
 DataValidade::DataValidade()
 {}
+DataValidade::DataValidade(int mes, int ano) throw (std::invalid_argument)
+{
+	set(mes, ano);
+}
 void DataValidade::validar(int mes, int ano) throw (std::invalid_argument)
 {
 	if(mes < 1 || mes > 12)
@@ -489,7 +513,7 @@ void DataValidade::set(int mes, int ano) throw (std::invalid_argument)
 	this->mes = mes;
 	this->ano = ano;
 }
-int DataValidade::getMes()
+int DataValidade::getMes() const
 {
 	/**
 	* Returns the month.
@@ -497,7 +521,7 @@ int DataValidade::getMes()
 	*/
 	return mes;
 }
-int DataValidade::getAno()
+int DataValidade::getAno() const
 {
 	/**
 	* Returns the year.
@@ -505,7 +529,7 @@ int DataValidade::getAno()
 	*/
 	return ano;
 }
-std::ostream& operator<<(std::ostream& os, DataValidade& d)  
+std::ostream& operator<<(std::ostream& os, const DataValidade& d)  
 {  
     os << d.getMes() << "/" << d.getAno();
     return os;  
@@ -531,6 +555,10 @@ std::istream& operator>>(std::istream& is, DataValidade& d)
 */
 Estado::Estado()
 {}
+Estado::Estado(std::string estado) throw (std::invalid_argument)
+{
+	set(estado);
+}
 void Estado::validar(std::string estado) throw (std::invalid_argument)
 {
 	if(estado == "AC" || estado == "AL" || estado == "AP" || estado == "AM"){}
@@ -563,7 +591,7 @@ void Estado::set(std::string estado) throw (std::invalid_argument)
 	validar(estado);
 	this->estado = estado;
 }
-std::string Estado::get()
+std::string Estado::get() const
 {
 	/**
 	* Returns the state.
@@ -571,7 +599,7 @@ std::string Estado::get()
 	*/
 	return estado;
 }
-std::ostream& operator<<(std::ostream& os, Estado& e)  
+std::ostream& operator<<(std::ostream& os, const Estado& e)  
 {  
     os << e.get();
     return os;  
@@ -599,6 +627,10 @@ std::istream& operator>>(std::istream& is, Estado& e)
 */
 Identificador::Identificador()
 {}
+Identificador::Identificador(std::string identificador) throw (std::invalid_argument)
+{
+	set(identificador);
+}
 void Identificador::validar(std::string identificador) throw (std::invalid_argument)
 {
 	int i, n = identificador.size();
@@ -637,7 +669,7 @@ std::string Identificador::get() const
 	*/
 	return identificador;
 }
-std::ostream& operator<<(std::ostream& os, Identificador& id)  
+std::ostream& operator<<(std::ostream& os, const Identificador& id)  
 {  
     os << id.get();
     return os;  
@@ -649,6 +681,24 @@ std::istream& operator>>(std::istream& is, Identificador& id)
 	id.set(iden);
     return is;  
 }
+bool Identificador::operator==(const Identificador &id)
+{
+	if(id.get() == get())
+		return true;
+	return false;
+}
+// std::ofstream& operator<<(std::ofstream& os, Identificador& id)  
+// {  
+//     os << id.get();
+//     return os;  
+// }  
+// std::ifstream& operator>>(std::ifstream& is, Identificador& id)  
+// {  
+// 	std::string iden;
+// 	is >> iden;
+// 	id.set(iden);
+//     return is;  
+// }
 
 
 
@@ -664,6 +714,10 @@ std::istream& operator>>(std::istream& is, Identificador& id)
 */
 Nome::Nome()
 {}
+Nome::Nome(std::string nome) throw (std::invalid_argument)
+{
+	set(nome);
+}
 void Nome::validar(std::string nome) throw (std::invalid_argument)
 {
 	int i, n = nome.size();
@@ -701,7 +755,7 @@ void Nome::set(std::string nome) throw (std::invalid_argument)
 	validar(nome);
 	this->nome = nome;
 }
-std::string Nome::get()
+std::string Nome::get() const
 {
 	/**
 	* Returns the name.
@@ -709,7 +763,7 @@ std::string Nome::get()
 	*/
 	return nome;
 }
-std::ostream& operator<<(std::ostream& os, Nome& nome)  
+std::ostream& operator<<(std::ostream& os, const Nome& nome)  
 {  
     os << nome.get();
     return os;  
@@ -736,6 +790,10 @@ std::istream& operator>>(std::istream& is, Nome& nome)
 */
 NumeroCartaoCredito::NumeroCartaoCredito()
 {}
+NumeroCartaoCredito::NumeroCartaoCredito(std::string numerocartaocredito) throw (std::invalid_argument)
+{
+	set(numerocartaocredito);
+}
 void NumeroCartaoCredito::validar(std::string numerocartaocredito) throw (std::invalid_argument)
 {
 	int i, n = numerocartaocredito.size();
@@ -779,7 +837,7 @@ void NumeroCartaoCredito::set(std::string numerocartaocredito) throw (std::inval
 	validar(numerocartaocredito);
 	this->numerocartaocredito = numerocartaocredito;
 }
-std::string NumeroCartaoCredito::get()
+std::string NumeroCartaoCredito::get() const
 {
 	/**
 	* Returns the credit card number.
@@ -787,7 +845,7 @@ std::string NumeroCartaoCredito::get()
 	*/
 	return numerocartaocredito;
 }
-std::ostream& operator<<(std::ostream& os, NumeroCartaoCredito& numero)  
+std::ostream& operator<<(std::ostream& os, const NumeroCartaoCredito& numero)
 {  
     os << numero.get();
     return os;  
@@ -816,6 +874,10 @@ std::istream& operator>>(std::istream& is, NumeroCartaoCredito& numero)
 */
 NumeroContaCorrente::NumeroContaCorrente()
 {}
+NumeroContaCorrente::NumeroContaCorrente(std::string numerocontacorrente) throw (std::invalid_argument)
+{
+	set(numerocontacorrente);
+}
 void NumeroContaCorrente::validar(std::string numerocontacorrente) throw (std::invalid_argument)
 {
 	int i, n = numerocontacorrente.size();
@@ -846,7 +908,7 @@ void NumeroContaCorrente::set(std::string numerocontacorrente) throw (std::inval
 	validar(numerocontacorrente);
 	this->numerocontacorrente = numerocontacorrente;
 }
-std::string NumeroContaCorrente::get()
+std::string NumeroContaCorrente::get() const
 {
 	/**
 	* Returns the string number from the object.
@@ -855,7 +917,7 @@ std::string NumeroContaCorrente::get()
 	*/
 	return numerocontacorrente;
 }
-std::ostream& operator<<(std::ostream& os, NumeroContaCorrente& numero)  
+std::ostream& operator<<(std::ostream& os, const NumeroContaCorrente& numero)
 {  
     os << numero.get();
     return os;  
@@ -881,6 +943,10 @@ std::istream& operator>>(std::istream& is, NumeroContaCorrente& numero)
 */
 Senha::Senha()
 {}
+Senha::Senha(std::string senha) throw (std::invalid_argument)
+{
+	set(senha);
+}
 void Senha::validar(std::string senha) throw (std::invalid_argument)
 {
 	bool upper = false, lower = false, digit = false, simbol = false;
@@ -943,7 +1009,7 @@ std::string Senha::get() const
 	*/
 	return senha;
 }
-std::ostream& operator<<(std::ostream& os, Senha& password)  
+std::ostream& operator<<(std::ostream& os, const Senha& password)  
 {  
     os << password.get();
     return os;  
@@ -954,6 +1020,12 @@ std::istream& operator>>(std::istream& is, Senha& password)
 	is >> sen;
 	password.set(sen);
     return is;  
+}
+bool Senha::operator==(const Senha &senha)
+{
+	if(senha.get() == get())
+		return true;
+	return false;
 }
 
 
@@ -972,6 +1044,10 @@ std::istream& operator>>(std::istream& is, Senha& password)
 */
 TipoAcomodacao::TipoAcomodacao()
 {}
+TipoAcomodacao::TipoAcomodacao(std::string tipoacomodacao) throw (std::invalid_argument)
+{
+	set(tipoacomodacao);
+}
 void TipoAcomodacao::validar(std::string tipoacomodacao) throw (std::invalid_argument)
 {
 	if(tipoacomodacao != "Casa" && tipoacomodacao != "Apartamento" && tipoacomodacao != "Flat")
@@ -998,11 +1074,24 @@ void TipoAcomodacao::set(std::string tipoacomodacao) throw (std::invalid_argumen
 	validar(tipoacomodacao);
 	this->tipoacomodacao = tipoacomodacao;
 }
-std::string TipoAcomodacao::get()
+std::string TipoAcomodacao::get() const
 {
 	/**
 	* Returns the type of accomodation.
 	* It is one of them: Apartamento, Casa or Flat
 	*/
 	return tipoacomodacao;
+}
+
+std::ostream& operator<<(std::ostream& os, const TipoAcomodacao& tipo)  
+{  
+    os << tipo.get();
+    return os;  
+}  
+std::istream& operator>>(std::istream& is, TipoAcomodacao& tipo)  
+{  
+	std::string sen;
+	is >> sen;
+	tipo.set(sen);
+    return is;  
 }

@@ -6,6 +6,7 @@
 #include "interfaces.hpp"
 #include "controladoras.hpp"
 #include "stubs.hpp"
+#include "servicos.hpp"
 
 #include "testes.hpp"
 
@@ -144,30 +145,30 @@ bool teste_entidade()
 
 IUInicializacao *initial_setting()
 {
-	IUInicializacao *cntrIUInicio = new CntrIUInicializacao();
-	IUCadastro *cntrIUCadastro = new CntrIUCadastro();
-	IUAutenticacao *cntrIUAutenticacao = new CntrIUAutenticacao();
-	IUAcomodacao *cntrIUAcomodacao = new CntrIUAcomodacao();
-	IULogado *cntrIULogado = new CntrIULogado();
-	IUReserva *cntrIUReserva = new CntrIUReserva();
-	IUCadastroAcomodacao *cntrIUCadastroAcomodacao = new CntrIUCadastroAcomodacao();
-	IUDados *cntrIUDados = new CntrIUDados();
-	IUAlterarSenha *cntrIUAlterarSenha = new CntrIUAlterarSenha();
-	IUAlterarNome *cntrIUAlterarNome = new CntrIUAlterarNome();
-	IUDeletarConta *cntrIUDeletarConta = new CntrIUDeletarConta();
-	IUCartao *cntrIUCartao = new CntrIUCartao();
-	IUContaCorrente *cntrIUContaCorrente = new CntrIUContaCorrente();
+	IUInicializacao			*cntrIUInicio				= new CntrIUInicializacao();
+	IUCadastro				*cntrIUCadastro				= new CntrIUCadastro();
+	IUAutenticacao			*cntrIUAutenticacao			= new CntrIUAutenticacao();
+	IUAcomodacao			*cntrIUAcomodacao			= new CntrIUAcomodacao();
+	IULogado				*cntrIULogado				= new CntrIULogado();
+	IUReserva				*cntrIUReserva				= new CntrIUReserva();
+	IUCadastroAcomodacao	*cntrIUCadastroAcomodacao	= new CntrIUCadastroAcomodacao();
+	IUDados					*cntrIUDados				= new CntrIUDados();
+	IUAlterarSenha			*cntrIUAlterarSenha			= new CntrIUAlterarSenha();
+	IUAlterarNome			*cntrIUAlterarNome			= new CntrIUAlterarNome();
+	IUDeletarConta			*cntrIUDeletarConta			= new CntrIUDeletarConta();
+	IUCartao				*cntrIUCartao				= new CntrIUCartao();
+	IUContaCorrente			*cntrIUContaCorrente		= new CntrIUContaCorrente();
 
-	ILNCadastro *cntrILNCadastro = new StubILNCadastro();
-	ILNAutenticacao *cntrILNAutenticacao = new StubILNAutenticacao();
-	ILNAcomodacao *cntrILNAcomodacao = new StubILNAcomodacao();
-	ILNReserva *cntrILNReserva = new StubILNReserva();
-	ILNCadastroAcomodacao *cntrILNCadastroAcomodacao = new StubILNCadastroAcomodacao();
-	ILNAlterarSenha *cntrILNAlterarSenha = new StubILNAlterarSenha();
-	ILNAlterarNome *cntrILNAlterarNome = new StubILNAlterarNome();
-	ILNDeletarConta *cntrILNDeletarConta = new StubILNDeletarConta();
-	ILNCartao *cntrILNCartao = new StubILNCartao();
-	ILNContaCorrente *cntrILNContaCorrente = new StubILNContaCorrente();
+	ILNCadastro				*cntrILNCadastro			= new CntrILNCadastro();
+	ILNAutenticacao			*cntrILNAutenticacao		= new CntrILNAutenticacao();
+	ILNAcomodacao			*cntrILNAcomodacao			= new StubILNAcomodacao();
+	ILNReserva				*cntrILNReserva				= new StubILNReserva();
+	ILNCadastroAcomodacao	*cntrILNCadastroAcomodacao	= new StubILNCadastroAcomodacao();
+	ILNAlterarSenha			*cntrILNAlterarSenha		= new StubILNAlterarSenha();
+	ILNAlterarNome			*cntrILNAlterarNome			= new StubILNAlterarNome();
+	ILNDeletarConta			*cntrILNDeletarConta		= new StubILNDeletarConta();
+	ILNCartao				*cntrILNCartao				= new StubILNCartao();
+	ILNContaCorrente		*cntrILNContaCorrente		= new StubILNContaCorrente();
 
 	// Aqui coloca os serviços
 
@@ -201,17 +202,61 @@ IUInicializacao *initial_setting()
 	return cntrIUInicio;	
 }
 
+void teste_CntrILNCadastro()
+{
+	Usuario usuario;
+	Identificador identificador;
+	Nome nome;
+	Senha senha;
+
+	identificador.set("maria");
+	nome.set("Joao da Silva Neto");
+	senha.set("aW3#vbOP");
+	usuario.setIdentificador(identificador);
+	usuario.setNome(nome);
+	usuario.setSenha(senha);
+
+
+	ILNCadastro *cntrILNCadastro = new CntrILNCadastro();
+	
+	cntrILNCadastro->cadastrar(usuario);
+
+	delete cntrILNCadastro;	
+}
+
+void teste_CntrILNAutenticacao()
+{
+	Usuario usuario;
+	Identificador identificador;
+	Nome nome;
+	Senha senha;
+
+	identificador.set("maria");
+	senha.set("aW3#vbOP");
+
+	std::cout << "haha" << std::endl;
+	
+	ILNAutenticacao *cntrILNAutenticacao = new CntrILNAutenticacao();
+	
+	cntrILNAutenticacao->autenticar(identificador, senha);
+
+	delete cntrILNAutenticacao;	
+}
+
 int main()
 {
 	IUInicializacao *cntrIUInicio;
 	// teste_dominio();
 	// teste_entidade();
+	// teste_CntrILNCadastro();
+	// teste_CntrILNAutenticacao();
 	cntrIUInicio = initial_setting();
 	// cntrIUInicio->verifica_consistencia();
 	
 	cntrIUInicio->menu();
 
 	// cntrIUInicio->libera();
+
 
 	return 0;
 }

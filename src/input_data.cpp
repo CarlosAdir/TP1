@@ -68,6 +68,32 @@ std::string green(std::string message)
 }
 void limpar_tela()
 {
-  system("clear");
+  system("clear || cls");
   // std::cout << "\n\n\n" << std::endl;
+}
+
+
+std::vector<std::string> split(std::string str, char delimiter = ' ')
+{
+    std::vector<std::string> ret;
+    if(str.empty()) 
+    {
+        ret.push_back(std::string(""));
+        return ret;
+    }
+
+    unsigned i = 0;
+    std::string strstack;
+    while(!(str.empty()) && (str[0] == delimiter)) {str.erase(0,1);}
+    std::reverse(str.begin(), str.end());
+    while(!(str.empty()) && (str[0] == delimiter)) {str.erase(0,1);}
+    std::reverse(str.begin(), str.end());
+    while(!str.empty())
+    {
+        ret.push_back(str.substr(i, str.find(delimiter)));
+        str.erase(0,str.find(delimiter));
+        while(!(str.empty()) && (str[0] == delimiter)) {str.erase(0,1);}
+    }
+
+    return ret;
 }

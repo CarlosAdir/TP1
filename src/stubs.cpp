@@ -1,9 +1,9 @@
 #include "stubs.hpp"
-#include "entidades.hpp"
 
 
 void StubILNCadastro::verifica_consistencia() throw (consistencia_error){}
 void StubILNCadastro::libera(){}
+
 void StubILNAutenticacao::verifica_consistencia() throw (consistencia_error){}
 void StubILNAutenticacao::libera(){}
 void StubILNAcomodacao::verifica_consistencia() throw (consistencia_error){}
@@ -59,12 +59,12 @@ ResultadoCadastro StubILNCadastro::cadastrar(const Usuario &user) throw(std::run
     
     if(c == SUCESSO)
     {
-        resultado.setValor(ResultadoCadastro::SUCESSO);
+        resultado.setValor(ResultadoCadastro::CADASTRADO);
         std::cout << "Cadastro realizado com sucesso!" << std::endl;
     }
     else
     {
-        resultado.setValor(ResultadoCadastro::FALHA);
+        resultado.setValor(ResultadoCadastro::EXISTE);
         std::cout << "O usuario ja existe!" << std::endl;
     }
     travar_tela();
@@ -101,12 +101,12 @@ ResultadoAutenticacao StubILNAutenticacao::autenticar(const Identificador &ident
     }while(c != SUCESSO && c != FALHA);
     if(c == SUCESSO)
     {
-	    resultado.setValor(ResultadoAutenticacao::SUCESSO);
+	    resultado.setValor(ResultadoAutenticacao::SENHA_VALIDA);
 	    std::cout << "Autenticacao realizada com sucesso!" << std::endl;
     }
 	else
 	{
-		resultado.setValor(ResultadoAutenticacao::FALHA);
+		resultado.setValor(ResultadoAutenticacao::SENHA_INVALIDA);
 		std::cout << "Nao foi possivel realizar a autenticacao!" << std::endl;
 	}
     travar_tela();

@@ -5,6 +5,7 @@
 #include "dominios.hpp"
 #include "entidades.hpp"
 #include "input_data.hpp"
+#include "resultados.hpp"
 
 // #include <stdexcept>
 // #include <iostream>

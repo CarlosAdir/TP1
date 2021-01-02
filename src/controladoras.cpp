@@ -251,7 +251,7 @@ void CntrIUCadastro::cadastrar()
 
 	result = cntrILNCadastro->cadastrar(usuario); // Aqui vem a parte do servico
 
-	if(result.getValor() == ResultadoAutenticacao::SUCESSO)
+	if(result.getValor() == ResultadoCadastro::CADASTRADO)
 		cntrIULogado->menu(identificador);
 }
 
@@ -392,14 +392,22 @@ void CntrIUAutenticacao::autenticar()
 
 	cons = getData(&identificador, &senha);
 	if(cons == false)
-	{
 		return;
-	}
 	else
 	{
 		result = cntrILNAutenticacao->autenticar(identificador, senha);
-		if(result.getValor() == ResultadoAutenticacao::SUCESSO)
+		if(result.getValor() == ResultadoAutenticacao::SENHA_VALIDA)
 			cntrIULogado->menu(identificador);
+		else
+		{
+			std::cout << "Houve uma falha na autenticacao:" << std::endl;
+			if(result.getValor() == ResultadoAutenticacao::SENHA_INVALIDA)
+				std::cout << "Senha fornecida nao condiz com a do banco de dados" << std::endl;
+			else
+				std::cout << "O usuario nao esta cadastrado no sistema!" << std::endl;
+
+			travar_tela();
+		}
 	}
 	// identificador.set("abcde");
 	// cntrIULogado->menu(identificador);
@@ -439,122 +447,6 @@ void CntrIUAutenticacao::autenticar()
 
 
 
-CntrIULogado::CntrIULogado() 
-{
-	cntrIUAcomodacao = NULL;
-	cntrIUReserva = NULL;
-	cntrIUCadastroAcomodacao = NULL;
-	cntrIUDados = NULL;
-}
-CntrIULogado::~CntrIULogado(){}
-void CntrIULogado::verifica_consistencia() throw (consistencia_error)
-{
-	if(cntrIUAcomodacao == NULL)
-		throw consistencia_error("IULogado->IUAcomodacao");
-	else
-	{
-		std::cout << green("IULogado->IUAcomodacao") << std::endl;
-		cntrIUAcomodacao->verifica_consistencia();
-	}
-	if(cntrIUReserva == NULL)
-		throw consistencia_error("IULogado->IUReserva");
-	else
-	{
-		std::cout << green("IULogado->IUReserva") << std::endl;
-		cntrIUReserva->verifica_consistencia();
-	}
-	if(cntrIUCadastroAcomodacao == NULL)
-		throw consistencia_error("IULogado->IUCadastroAcomodacao");
-	else
-	{
-		std::cout << green("IULogado->IUCadastroAcomodacao") << std::endl;
-		cntrIUCadastroAcomodacao->verifica_consistencia();
-	}
-	if(cntrIUDados == NULL)
-		throw consistencia_error("IULogado->IUDados");
-	else
-	{
-		std::cout << green("IULogado->IUDados") << std::endl;
-		cntrIUDados->verifica_consistencia();
-	}
-}
-void CntrIULogado::libera()
-{
-	if(cntrIUAcomodacao != NULL)
-	{
-		// cntrIUAcomodacao->libera();
-		delete cntrIUAcomodacao;
-		cntrIUAcomodacao = NULL;
-	}
-	if(cntrIUReserva != NULL)
-	{
-		cntrIUReserva->libera();
-		delete cntrIUReserva;
-		cntrIUReserva = NULL;
-	}
-	if(cntrIUCadastroAcomodacao != NULL)
-	{
-		cntrIUCadastroAcomodacao->libera();
-		delete cntrIUCadastroAcomodacao;
-		cntrIUCadastroAcomodacao = NULL;
-	}
-	if(cntrIUDados != NULL)
-	{
-		cntrIUDados->libera();
-		delete cntrIUDados;
-		cntrIUDados = NULL;
-	}
-}
-void inline CntrIULogado::setCntrIUAcomodacao(IUAcomodacao *cntrIUAcomodacao)
-{
-	this->cntrIUAcomodacao = cntrIUAcomodacao;
-}
-void inline CntrIULogado::setCntrIUReserva(IUReserva *cntrIUReserva)
-{
-	this->cntrIUReserva = cntrIUReserva;
-}
-void inline CntrIULogado::setCntrIUCadastroAcomodacao(IUCadastroAcomodacao *cntrIUCadastroAcomodacao)
-{
-	this->cntrIUCadastroAcomodacao = cntrIUCadastroAcomodacao;
-}
-void inline CntrIULogado::setCntrIUDados(IUDados *cntrIUDados)
-{
-	this->cntrIUDados = cntrIUDados;
-}
-
-
-void CntrIULogado::menu(Identificador &identificador)
-{
-	char c;
-	while(true)
-	{
-		apresentarOpcoes(identificador);
-		c = getch();
-		if(c == B_ACOMODACAO)
-			cntrIUAcomodacao->acomodacao();
-		else if(c == B_CADASTRAR_ACOMODACAO)
-			cntrIUCadastroAcomodacao->menu(identificador);
-		else if(c == B_RESERVA)
-			cntrIUReserva->menu(identificador);
-		else if(c == B_DADOS)
-			cntrIUDados->menu(identificador);
-		else if(c == B_LOGOUT)
-			break;
-    }
-}
-void CntrIULogado::apresentarOpcoes(Identificador &identificador)
-{
-	limpar_tela();
-	std::cout << std::endl << "Tela de logado." << std::endl;
-	std::cout << "Identificador: " << identificador << std::endl << std::endl;
-
-	std::cout << B_ACOMODACAO << ") Acomodacao" << std::endl;
-	std::cout << B_CADASTRAR_ACOMODACAO  << ") Cadastrar Acomodacao" << std::endl;
-	std::cout << B_RESERVA << ") Reserva" << std::endl;
-	std::cout << B_DADOS << ") Dados" << std::endl;
-	std::cout << std::endl;
-	std::cout << B_LOGOUT << ") Logout" << std::endl;
-}
 
 
 
@@ -758,6 +650,150 @@ void CntrIUAcomodacao::imprime_acomodacoes(std::vector<Acomodacao> &acomodacoes)
 
 
 
+CntrIULogado::CntrIULogado() 
+{
+	cntrIUAcomodacao = NULL;
+	cntrIUReserva = NULL;
+	cntrIUCadastroAcomodacao = NULL;
+	cntrIUDados = NULL;
+}
+CntrIULogado::~CntrIULogado(){}
+void CntrIULogado::verifica_consistencia() throw (consistencia_error)
+{
+	if(cntrIUAcomodacao == NULL)
+		throw consistencia_error("IULogado->IUAcomodacao");
+	else
+	{
+		std::cout << green("IULogado->IUAcomodacao") << std::endl;
+		cntrIUAcomodacao->verifica_consistencia();
+	}
+	if(cntrIUReserva == NULL)
+		throw consistencia_error("IULogado->IUReserva");
+	else
+	{
+		std::cout << green("IULogado->IUReserva") << std::endl;
+		cntrIUReserva->verifica_consistencia();
+	}
+	if(cntrIUCadastroAcomodacao == NULL)
+		throw consistencia_error("IULogado->IUCadastroAcomodacao");
+	else
+	{
+		std::cout << green("IULogado->IUCadastroAcomodacao") << std::endl;
+		cntrIUCadastroAcomodacao->verifica_consistencia();
+	}
+	if(cntrIUDados == NULL)
+		throw consistencia_error("IULogado->IUDados");
+	else
+	{
+		std::cout << green("IULogado->IUDados") << std::endl;
+		cntrIUDados->verifica_consistencia();
+	}
+}
+void CntrIULogado::libera()
+{
+	if(cntrIUAcomodacao != NULL)
+	{
+		// cntrIUAcomodacao->libera();
+		delete cntrIUAcomodacao;
+		cntrIUAcomodacao = NULL;
+	}
+	if(cntrIUReserva != NULL)
+	{
+		cntrIUReserva->libera();
+		delete cntrIUReserva;
+		cntrIUReserva = NULL;
+	}
+	if(cntrIUCadastroAcomodacao != NULL)
+	{
+		cntrIUCadastroAcomodacao->libera();
+		delete cntrIUCadastroAcomodacao;
+		cntrIUCadastroAcomodacao = NULL;
+	}
+	if(cntrIUDados != NULL)
+	{
+		cntrIUDados->libera();
+		delete cntrIUDados;
+		cntrIUDados = NULL;
+	}
+}
+void inline CntrIULogado::setCntrIUAcomodacao(IUAcomodacao *cntrIUAcomodacao)
+{
+	this->cntrIUAcomodacao = cntrIUAcomodacao;
+}
+void inline CntrIULogado::setCntrIUReserva(IUReserva *cntrIUReserva)
+{
+	this->cntrIUReserva = cntrIUReserva;
+}
+void inline CntrIULogado::setCntrIUCadastroAcomodacao(IUCadastroAcomodacao *cntrIUCadastroAcomodacao)
+{
+	this->cntrIUCadastroAcomodacao = cntrIUCadastroAcomodacao;
+}
+void inline CntrIULogado::setCntrIUDados(IUDados *cntrIUDados)
+{
+	this->cntrIUDados = cntrIUDados;
+}
+
+
+void CntrIULogado::menu(Identificador &identificador)
+{
+	char c;
+	while(true)
+	{
+		apresentarOpcoes(identificador);
+		c = getch();
+		if(c == B_ACOMODACAO)
+			cntrIUAcomodacao->acomodacao();
+		else if(c == B_CADASTRAR_ACOMODACAO)
+			cntrIUCadastroAcomodacao->menu(identificador);
+		else if(c == B_RESERVA)
+			cntrIUReserva->menu(identificador);
+		else if(c == B_DADOS)
+			cntrIUDados->menu(identificador);
+		else if(c == B_LOGOUT)
+			break;
+    }
+}
+void CntrIULogado::apresentarOpcoes(Identificador &identificador)
+{
+	limpar_tela();
+	std::cout << std::endl << "Tela de logado." << std::endl;
+	std::cout << "Identificador: " << identificador << std::endl << std::endl;
+
+	std::cout << B_ACOMODACAO << ") Acomodacao" << std::endl;
+	std::cout << B_CADASTRAR_ACOMODACAO  << ") Cadastrar Acomodacao" << std::endl;
+	std::cout << B_RESERVA << ") Reserva" << std::endl;
+	std::cout << B_DADOS << ") Dados" << std::endl;
+	std::cout << std::endl;
+	std::cout << B_LOGOUT << ") Logout" << std::endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -800,7 +836,7 @@ void CntrIUReserva::menu(Identificador &identificador)
 		return;
 	while(true)
 	{
-		apresentarOpcoes();
+		apresentarOpcoes(identificador);
 		c = getch();
 		if(c == B_ADICIONAR)
 			adicionar_reserva(identificador);
@@ -810,10 +846,11 @@ void CntrIUReserva::menu(Identificador &identificador)
 			break;
     }
 }
-void CntrIUReserva::apresentarOpcoes()
+void CntrIUReserva::apresentarOpcoes(Identificador &identificador)
 {
 	limpar_tela();
 	std::cout << std::endl << "Tela de adicionar/remover reserva." << std::endl;
+	std::cout << "Identificador: " << identificador << std::endl << std::endl;
 
 	std::cout << B_ADICIONAR << ") Adicionar" << std::endl;
 	std::cout << B_REMOVER  << ") Remover" << std::endl;
@@ -995,7 +1032,7 @@ void CntrIUCadastroAcomodacao::menu(Identificador &identificador)
 		return;
 	while(true)
 	{
-		apresentarOpcoes();
+		apresentarOpcoes(identificador);
 		c = getch();
 		if(c == B_ADICIONAR)
 			adicionar_acomodacao(identificador);
@@ -1014,10 +1051,11 @@ bool CntrIUCadastroAcomodacao::verifica_contacorrente(Identificador &identificad
 	travar_tela();
 	return false;
 }
-void CntrIUCadastroAcomodacao::apresentarOpcoes()
+void CntrIUCadastroAcomodacao::apresentarOpcoes(Identificador &identificador)
 {
 	limpar_tela();
 	std::cout << std::endl << "Tela de adicionar/remover acomodacao." << std::endl;
+	std::cout << "Identificador: " << identificador << std::endl << std::endl;
 
 	std::cout << B_ADICIONAR << ") Adicionar" << std::endl;
 	std::cout << B_REMOVER  << ") Remover" << std::endl;
@@ -1056,9 +1094,9 @@ bool CntrIUCadastroAcomodacao::getDataAdicionar(Acomodacao *acomodacao)
 				{
 					std::cout << "Tipo da Acomodacao          : ";
 					if(i == 1)
-						std::cin >> acomod_identificador;
+						std::cin >> tipo;
 					else
-						std::cout << acomod_identificador << std::endl;
+						std::cout << tipo << std::endl;
 				}
 
 				if(i > 1)
@@ -1317,7 +1355,7 @@ void CntrIUDados::menu(Identificador &identificador)
 	char c;
 	while(true)
 	{
-		apresentarOpcoes();
+		apresentarOpcoes(identificador);
 		c = getch();
 		if(c == B_CARTAO)
 			cntrIUCartao->setCartao(identificador);
@@ -1333,10 +1371,11 @@ void CntrIUDados::menu(Identificador &identificador)
 			break;
     }
 }
-void CntrIUDados::apresentarOpcoes()
+void CntrIUDados::apresentarOpcoes(Identificador &identificador)
 {
 	limpar_tela();
 	std::cout << std::endl << "Tela de Perfil do Usuario." << std::endl;
+	std::cout << "Identificador: " << identificador << std::endl << std::endl;
 
 	std::cout << B_CARTAO << ") Adicionar/Alterar cartao de credito" << std::endl;
 	std::cout << B_CONTA  << ") Adicionar/Alterar conta corrente" << std::endl;
@@ -1407,6 +1446,7 @@ bool CntrIUCartao::getData(CartaoCredito *cartao)
 		while(true) {
 			limpar_tela();
 			std::cout << std::endl << "Tela de Cartao de Credito" << std::endl << std::endl;
+			
 			std::cout << std::endl << "Digite seu novo cartao: ";
 			std::cout << std::endl << mensagem << std::endl << std::endl;
 			try

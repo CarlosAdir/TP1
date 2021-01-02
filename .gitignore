@@ -1,6 +1,6 @@
-Moodle/
+Moodle/*
+Trabalho/*
 *.senha
 Trabalho/documentation/*
-Trabalho/T1/bin/*
-Trabalho/T1/obj/*
 *.depend
+ignorar/*
