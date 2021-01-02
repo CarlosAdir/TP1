@@ -23,6 +23,10 @@ There is a ```makefile``` inside the folder ```src/```.
 So, to use it, just go inside the folder ```src/``` and type ```make``` in the terminal.
 
 
+## Documentation
+
+All the documentation was made by **Doxygen**, please, verify the [website][documentation_website]  
+
 
 ## Contact
 
@@ -34,3 +38,4 @@ Carlos Adir | carlos.adir.leite@gmail.com
 
 
 [doxygen_website]: https://www.doxygen.nl/index.html
+[documentation_website]: https://carlos-adir.github.io/HotelsSystem/
